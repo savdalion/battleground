@@ -1,0 +1,44 @@
+﻿// @see Прим. к warrior/characteristic.gv.
+
+
+// Характеристика поля битвы.
+
+digraph Characteristic {
+
+
+color = "lightgrey";
+concentrate = true;
+clusterrank = "global";
+edge [ fontsize = 10 ];
+
+
+subgraph clusterType {
+
+    node [ shape = "polygon", sides = 10, distortion = "0.6", orientation = 10, skew = "0.3", color = "blue", fontsize = 10 ];
+    edge [ color = "red" ];
+
+
+    "размер" -> "размер" [ label = "size3d" ];
+
+} // subgraph clusterType
+
+
+
+
+
+
+
+
+// Внутренние названия характеристик элемента.
+subgraph clusterInnerName {
+
+    edge [ color = "gray" ];
+
+
+    // перечисляем все характеристики этого элемента
+    "размер" -> "размер" [ label = "size" ];
+
+} // subgraph clusterInnerName
+
+
+} // digraph Characteristic

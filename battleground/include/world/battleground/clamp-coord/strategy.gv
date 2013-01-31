@@ -1,0 +1,101 @@
+﻿// #! Если редактируется в GVEdit 1.01, при закрытии файла обязательно делать копию:
+//    разрушает русские буквы.
+// @see http://graphviz.org/doc/info/attrs.html
+
+
+// Поведение поля битвы.
+// @see Прим. к warrior/training/single-sword/turn/strategy.gv.
+digraph Strategy {
+
+label = "Поле битвы. Удерживание элементов в своих пределах.";
+
+
+color = "lightgrey";
+concentrate = true;
+clusterrank = "global";
+nodesep = 0.4;
+edge [ fontsize = 10 ];
+
+
+subgraph clusterIn {
+
+    node [ shape = "box", color = "blue", fontsize = 10 ];
+    edge [ style = "dotted", color = "blue" ];
+
+
+    "Координата элемента" -> "In";
+    "Размер территории"   -> "In";
+
+} // subgraph clusterIn
+
+
+
+
+
+
+
+
+subgraph clusterDuration {
+
+    node [ shape = "folder" ];
+    edge [ shape = "dotted", style = "dashed", color = "green" ];
+
+
+    // выполняется моментально
+    "Проверяет координату" -> "Проверяет координату" [ label = "0 s" ];
+    "Отменяет координату"  -> "Отменяет координату"  [ label = "0 s" ];
+
+} // subgraph clusterDuration
+
+
+
+
+
+
+
+
+subgraph clusterChain {
+
+    node [ shape = "folder" ];
+    edge [ style = "dotted" ];
+
+
+    // действие, начинающее и завершающее эту цепочку
+    "In"  [ color = "red" ];
+    "Out" [ color = "red" ];
+    "In" -> "Проверяет координату";
+
+
+    // выполняется при условии выхода координат за пределы поля битвы
+    // # Просто генерируем событие: элемент сам проверит наличие события
+    //   "Отменяет координату" и поступит должным образом.
+    "Проверяет координату" -> "Отменяет координату"
+        [ label = "outer( Координата элемента, Размер территории )" ];
+
+    "Проверяет координату" -> "Out" [ label = 1.0 ];
+    "Отменяет координату"  -> "Out" [ label = 1.0 ];
+
+} // subgraph clusterChain
+
+
+
+
+
+
+
+
+
+
+// Внутренние названия действий стратегии.
+subgraph clusterInnerName {
+
+    edge [ color = "gray" ];
+
+
+    "Проверяет координату" -> "Проверяет координату" [ label = "verifyCoord" ];
+    "Отменяет координату"  -> "Отменяет координату"  [ label = "cancelCoord" ];
+
+} // subgraph clusterGroupElement
+
+
+} // digraph Strategy
