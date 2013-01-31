@@ -1,0 +1,28 @@
+﻿// Воплощение воина с именем Айвенго
+
+// # Название воплощения начинается с прописной буквы.
+// # Должны быть упомянуты все характеристики элемента.
+digraph Incarnation {
+
+
+color = "lightgrey";
+concentrate = true;
+clusterrank = "global";
+edge [ fontsize = 10 ];
+
+
+subgraph clusterCharacteristic {
+
+    node [ shape = "polygon", sides = 10, distortion = "0.6", orientation = 10, skew = "0.3", color = "blue", fontsize = 10 ];
+    edge [ color = "red" ];
+
+
+    "координата"   -> "=" [ label = "0 0" ];
+    "направление"  -> "=" [ label = "east" ];
+    "меч"          -> "=" [ label = "+" ];
+    "устойчивость" -> "=" [ label = "0.9" ];
+
+} // subgraph clusterCharacteristic
+
+
+} // digraph Incarnation

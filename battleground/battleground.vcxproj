@@ -24,6 +24,7 @@
     <ClInclude Include="battleground\include\Engine.h" />
     <ClInclude Include="heat-transfer\include\HeatTransfer.h" />
     <ClInclude Include="include\battleground\Engine.h" />
+    <ClInclude Include="include\porte\Graph.h" />
     <ClInclude Include="include\porte\Engine.h" />
   </ItemGroup>
   <ItemGroup>
@@ -32,6 +33,7 @@
     <None Include="battleground\include\Engine.inl" />
     <None Include="heat-transfer\include\HeatTransfer.inl" />
     <None Include="include\porte\Engine.inl" />
+    <None Include="include\porte\Graph.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6E9631AD-5F11-4244-9D03-791F124E05AB}</ProjectGuid>

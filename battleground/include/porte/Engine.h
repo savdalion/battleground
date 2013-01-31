@@ -11,6 +11,7 @@
 #include <boost/unordered_map.hpp>
 #include <boost/assign.hpp>
 #include "../world/@/_.hcl"
+#include "Graph.h"
 
 
 namespace battleground {
@@ -31,6 +32,29 @@ public:
 
 
 
+    /**
+    * Воплощает элемент с заданным именем.
+    * Структура элемента задаётся при формировании мира из графов, данные -
+    * загружается из файла.
+    */
+    void incarnate( const std::string& kind,  const std::string& name );
+
+
+
+
+    /**
+    * @return След. свободный UID для элемента.
+    *
+    * #! Каждый вызов - другой UID.
+    */
+    inline uid_t nextUID() {
+        ++mLastUID;
+        return mLastUID;
+    }
+
+    
+    
+    
     inline porte::Pulse live() const {
         return mLive;
     }
@@ -157,13 +181,22 @@ private:
     */
     porte::Pulse mLive;
 
-    boost::unordered_map< std::string, cl::Kernel >  mKernelCL;
 
+    /**
+    * Последний выданный воплощённому элементу UID.
+    */
+    uid_t mLastUID;
+
+
+    /**
+    * Для работы с OpenCL.
+    */
+    boost::unordered_map< std::string, cl::Kernel >  mKernelCL;
     cl::Context mContextCL;
     std::vector< cl::Device >  mDeviceCL;
     cl::CommandQueue mQueueCL;
-
     cl_int errorCL;
+
 
     // подключаем переменные для обмена с OpenCL
     #include "../world/@/enum-buffer-cl.inl"

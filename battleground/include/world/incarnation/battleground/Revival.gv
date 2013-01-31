@@ -1,0 +1,24 @@
+﻿// @see Комм. к warrior / Ivanhoe.gv.
+// Воплощение поля битвы с именем Возрождение
+
+digraph Incarnation {
+
+
+color = "lightgrey";
+concentrate = true;
+clusterrank = "global";
+edge [ fontsize = 10 ];
+
+
+subgraph clusterCharacteristic {
+
+    node [ shape = "polygon", sides = 10, distortion = "0.6", orientation = 10, skew = "0.3", color = "blue", fontsize = 10 ];
+    edge [ color = "red" ];
+
+
+    "размер" -> "=" [ label = "100 100 50" ];
+
+} // subgraph clusterCharacteristic
+
+
+} // digraph Incarnation

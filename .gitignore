@@ -1,3 +1,12 @@
 *.sdf
 
 /ipch/porte-a17c235b/.gitignore
+*.ipch
+*.ipch
+
+/battleground/include/world/incarnation/battleground/.png
+/battleground/include/world/incarnation/warrior/.png
+/battleground/include/world/kind/battleground/.png
+/battleground/include/world/kind/battleground/clamp-coord/.png
+/battleground/include/world/kind/warrior/.png
+/battleground/include/world/kind/warrior/training/single-sword/turn/.png

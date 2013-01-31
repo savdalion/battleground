@@ -57,6 +57,9 @@
     <ClInclude Include="include\porte\Engine.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="include\porte\Graph.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="battleground\include\Engine.inl">
@@ -72,6 +75,9 @@
       <Filter>Заголовочные файлы</Filter>
     </None>
     <None Include="include\porte\Engine.inl">
+      <Filter>Заголовочные файлы</Filter>
+    </None>
+    <None Include="include\porte\Graph.inl">
       <Filter>Заголовочные файлы</Filter>
     </None>
   </ItemGroup>

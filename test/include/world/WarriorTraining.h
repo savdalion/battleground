@@ -43,7 +43,8 @@ TEST_F( WarriorTT,  SingleWarriorSingleStrategy_TrainingSingleSwordTurn ) {
 #if 1
 
     // подготовка
-    // @todo ...
+    engine()->incarnate( "battleground", "Revival" );
+    engine()->incarnate( "warrior",      "Ivanhoe" );
 
 
 

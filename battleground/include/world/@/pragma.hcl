@@ -1,0 +1,70 @@
+// #i Для OpenCL 1.2 включать не обязательно.
+#pragma OPENCL EXTENSION cl_khr_fp64 : enable
+
+
+
+
+// # Т.к. не все видеокарты поддерживают 'double' для OpenCL и не все CPU
+//   на сегодня корректно отрабатывают двойную точность (на CPU Intel i5 под
+//   Windows мне не удалось подключить расширение cl_khr_fp64), я отказался
+//   от работы с типом 'double' в пользу составных чисел, где требуется
+//   большая точность.
+// @see world::dungeoncrawl::starsystem::l0:: coordOne_t, mass_t
+#if 0
+
+// Потребность в директивах для разных версий OpenCL...
+// #! При работе через OpenCL 1.1 на CPU - ошибка на прагмах ниже.
+// @see http://khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/preprocessorDirectives.html
+#if __OPENCL_VERSION__ == 100
+
+/* @todo В звёздной системе работать с двойной точностью.
+//       NVIDIA 8800GTS работает только с float.
+#ifdef cl_khr_fp64
+    #pragma OPENCL EXTENSION cl_khr_fp64 : enable
+#endif
+
+#ifdef cl_amd_fp64
+    #pragma OPENCL EXTENSION cl_amd_fp64 : enable
+#endif
+*/
+
+
+// Разрешаем запись в короткие регистры.
+// @todo optimize? Работать только с длинными регистрами?
+#pragma OPENCL EXTENSION cl_khr_byte_addressable_store : enable
+
+// Включаем функции последовательного обращения к памяти.
+// @see OpenCL / atomic
+// @todo optimize? Разрешить свободную работу с памятью?
+#pragma OPENCL EXTENSION cl_khr_global_int32_base_atomics : enable
+#pragma OPENCL EXTENSION cl_khr_local_int32_base_atomics : enable
+#pragma OPENCL EXTENSION cl_khr_global_int32_extended_atomics : enable
+#pragma OPENCL EXTENSION cl_khr_local_int32_extended_atomics : enable
+#pragma OPENCL EXTENSION cl_khr_int64_base_atomics : enable
+#pragma OPENCL EXTENSION cl_khr_int64_base_atomics : enable
+
+
+#else
+
+/* - @todo ? Не работает на CPU Intel i5.
+#pragma OPENCL EXTENSION cl_intel_printf : enable
+#ifdef cl_khr_fp64
+    #pragma OPENCL EXTENSION cl_khr_fp64 : enable
+#elif defined(cl_amd_fp64)
+    #pragma OPENCL EXTENSION cl_amd_fp64 : enable
+#else
+    #error "Double precision floating point not supported by OpenCL implementation."
+#endif
+*/
+
+/* - нет ошибки, но нет и включения.
+#pragma EXTENSION cl_khr_fp64 : enable
+#pragma EXTENSION cl_intel_printf : enable
+*/
+// @todo ? Даже включение всех расширений не включает двойную точность для CPU Intel i5.
+//#pragma OPENCL EXTENSION all : enable
+
+
+#endif
+
+#endif

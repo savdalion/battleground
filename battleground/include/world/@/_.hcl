@@ -5,33 +5,45 @@
 
 // # Типы данных С++ переопределены в restruct.hcl.
 // # Здесь определяем некоторые "особые" для C++.
+typedef cl_bool  bool_t;
+
 typedef cl_float    real_t;
 typedef cl_float2   real2_t;
 typedef cl_float3   real3_t;
 typedef cl_float4   real4_t;
 
+typedef real3_t  coord_t;
 typedef real3_t  direction_t;
 
 
 
 
 /**
+* Уникальный в *рамках мира* идентификатор элемента.
+*/
+typedef cl_int  uid_t;
+
+
+
+/**
 * Модификаторы характеристик.
 */
-// булевый модификатор - это инверсия, если модификатор принял значение false
-typedef cl_bool  _bool;
+// булевый модификатор - это инверсия, если модификатор принял значение true
+typedef cl_bool  _bool_t;
 
 // модификатор числа - это пара значенй
 //   1 для прибавления к базовой характеристике
 //   2 для умножения на базовую характеристику
-typedef real_t  _real_t;
+typedef real_t   _real_t[ 2 ];
 typedef real3_t  _real3_t[ 2 ];
+
+typedef real3_t  _coord_t[ 2 ];
 
 // модификатор направления - это углы поворота по 3 коорд. осям относительно
 // текущего направления с теми же правилами, что для модификатора числа;
 // разница только в расчётной формуле относит. базового значения: здесь
-// второе значение - это % поворота на 360: 360 = 1.0 (100%), плюс - против
-// часовой, минус - по часовой
+// второе значение - это % (непер) поворота на 360: 0 градусов = 1.0 (0%),
+// плюс - против часовой, минус - по часовой
 typedef real3_t  _direction_t[ 2 ];
 
 
@@ -47,6 +59,28 @@ typedef real_t action_t;
 
 
 /**
+* Немного констант.
+*
+* @todo optimize Вынести в #define при компиляции ядра.
+*/
+const bool_t DEFAULT_BOOL = false;
+const _bool_t DEFAULT_MODIFICATOR_BOOL = false;
+
+const real_t  DEFAULT_REAL = 0;
+const _real_t DEFAULT_MODIFICATOR_REAL_2K = { { 0 },  { 1 } };
+
+const real3_t  DEFAULT_REAL3 = { 0, 0, 0 };
+const _real3_t DEFAULT_MODIFICATOR_REAL3_2K = { { 0, 0, 0 },  { 1, 1, 1 } };
+
+const coord_t  DEFAULT_COORD = { 0, 0, 0 };
+const _coord_t DEFAULT_MODIFICATOR_COORD_2K = { { 0, 0, 0 },  { 1, 1, 1 } };
+
+const direction_t  DEFAULT_DIRECTION = { 0, 0, 0 };
+const _direction_t DEFAULT_MODIFICATOR_DIRECTION_2K = { { 0, 0, 0 },  { 1, 1, 1 } };
+
+
+
+/**
 * Группы элементов мира.
 *
 * # Разбиты на "характеристики" и "действия" для оптимизации чтения/записи
@@ -55,16 +89,20 @@ typedef real_t action_t;
 */
 // ВОИН
 typedef struct {
-    real3_t   coord;
-    _real3_t  _coord;
+    // обязательные
+    uid_t uid;
+
+    // дополнительные
+    coord_t   coord;
+    _coord_t  _coord;
 
     direction_t   direction;
     _direction_t  _direction;
 
-    cl_bool   sword;
-    _bool  _sword;
+    bool_t   sword;
+    _bool_t  _sword;
 
-    real_t  stability;
+    real_t   stability;
     _real_t  _stability;
 
 } characteristicWarrior_t;
@@ -87,8 +125,13 @@ typedef struct {
 
 // ПОЛЕ БИТВЫ
 typedef struct {
+    // обязательные
+    uid_t uid;
+
+    // дополнительные
     real3_t   size;
     _real3_t  _size;
+
 } characteristicBattleground_t;
 
 
@@ -115,8 +158,8 @@ typedef struct {
 
 /**
 * Элементы портулана по группам.
-* Общее кол-во получено из графов.
-* @todo optimize fine Выравнивать структуры для оптимального быстродействия OpenCL.
+* Общее кол-во получено из графов 'incarnation'.
+* @todo optimize fine Выравнивать кол-ва для оптимального быстродействия OpenCL.
 */
 const cl_uint WARRIOR_COUNT = 100;
 typedef characteristicWarrior_t*  characteristicWarriorContent_t;

@@ -4,13 +4,14 @@ namespace battleground {
 inline Engine::Engine(
 ) :
     mLive(),
+    mLastUID( 0 ),
     errorCL( CL_SUCCESS )
 {
     // Подготавливаем контекст и очередь команд для работы с OpenCL
     prepareCL();
 
     // Инициируем переменные для обмена данными с OpenCL
-    #include "../world/@/init-buffer-cl.h"
+    #include "../world/@/init-buffer-cl.inl"
 
     // # Ядра OpenCL соберём по требованию.
 }
@@ -19,6 +20,16 @@ inline Engine::Engine(
 
 
 inline Engine::~Engine() {
+}
+
+
+
+
+inline void Engine::incarnate(
+    const std::string& kind,
+    const std::string& name
+) {
+    #include "../world/@/incarnate-element.inl"
 }
 
 
@@ -169,9 +180,9 @@ inline void Engine::compileCLKernel(
     // (используются всеми ядрами движка)
     // #! Важен порядок подключения.
     std::vector< std::string > hcl = boost::assign::list_of
-        ( PATH_CL_BATTLEGROUND + "/pragma.hcl" )
-        ( PATH_CL_BATTLEGROUND + "/restruct.hcl" )
-        ( PATH_CL_BATTLEGROUND + "/_.hcl" )
+        ( CL_WORLD_PATH_BATTLEGROUND + "/pragma.hcl" )
+        ( CL_WORLD_PATH_BATTLEGROUND + "/restruct.hcl" )
+        ( CL_WORLD_PATH_BATTLEGROUND + "/_.hcl" )
     ;
     hcl.insert( hcl.end(), includeHCL.cbegin(), includeHCL.cend() );
     for (auto itr = hcl.cbegin(); itr != hcl.cend(); ++itr) {
@@ -206,7 +217,7 @@ inline void Engine::compileCLKernel(
         // Program Setup
         const std::string fileKernel = kernelKey + ".cl";
         const std::string pathAndName =
-            PATH_CL_BATTLEGROUND + "/" + fileKernel;
+            CL_WORLD_PATH_BATTLEGROUND + "/" + fileKernel;
 #ifdef _DEBUG
         std::cout << "\"" << fileKernel << "\" ..";
 #endif
@@ -322,8 +333,8 @@ inline std::string Engine::commonConstantCLKernel() {
         << " -D __DEBUG"
         //<< " -D GPU_OPENCL"
 
-        << " -D WARRIOR_COUNT=" << WARRIOR_COUNT
-        << " -D BATTLEFIELD_COUNT=" << BATTLEGROUND_COUNT
+        // добавим констант от графов
+        #include "../world/@/constant-cl.inl"
 
         // #! Если для вычислений не используется double, важно передавать
         //    вещественные значения как float. Иначе на драйвере OpenCL 1.2
