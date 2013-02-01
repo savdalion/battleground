@@ -10,7 +10,8 @@ inline void Engine::incarnateWarrior(
 ) {
     // найдём первую свободную ячейку этого вида и поместим туда элемент
     // # Ячейка элемента портулана считается свободной, если её UID == 0.
-    auto itr = characteristicWarriorContentPtr.get();
+    auto pt = portulan()->topology();
+    auto itr = pt->characteristicWarriorContentPtr.get();
     const auto itrEnd = itr + WARRIOR_COUNT;
     for ( ; itr != itrEnd; ++itr) {
         if (itr->uid == 0) {
@@ -32,7 +33,8 @@ inline void Engine::incarnateBattleground(
 ) {
     // найдём первую свободную ячейку этого вида и поместим туда элемент
     // # Ячейка элемента портулана считается свободной, если её UID == 0.
-    auto itr = characteristicBattlegroundContentPtr.get();
+    auto pt = portulan()->topology();
+    auto itr = pt->characteristicBattlegroundContentPtr.get();
     const auto itrEnd = itr + BATTLEGROUND_COUNT;
     for ( ; itr != itrEnd; ++itr) {
         if (itr->uid == 0) {

@@ -26,6 +26,8 @@
     <ClInclude Include="include\battleground\Engine.h" />
     <ClInclude Include="include\porte\Graph.h" />
     <ClInclude Include="include\porte\Engine.h" />
+    <ClInclude Include="include\portulan\Portulan.h" />
+    <ClInclude Include="include\portulan\Topology.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="include\battleground\StoreListener.inl" />
@@ -34,6 +36,7 @@
     <None Include="heat-transfer\include\HeatTransfer.inl" />
     <None Include="include\porte\Engine.inl" />
     <None Include="include\porte\Graph.inl" />
+    <None Include="include\portulan\Topology.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6E9631AD-5F11-4244-9D03-791F124E05AB}</ProjectGuid>

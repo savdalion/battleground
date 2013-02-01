@@ -45,6 +45,8 @@ TEST_F( WarriorTT,  SingleWarriorSingleStrategy_TrainingSingleSwordTurn ) {
     // подготовка
     engine()->incarnateSet( "a" );
 
+    const auto pt = engine()->portulan()->topology();
+
 
 
     // покажем результат

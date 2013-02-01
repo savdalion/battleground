@@ -3,6 +3,7 @@ namespace battleground {
 
 inline Engine::Engine(
 ) :
+    mPortulan( new Portulan() ),
     mLive(),
     mLastUID( 0 ),
     errorCL( CL_SUCCESS )
@@ -11,7 +12,7 @@ inline Engine::Engine(
     prepareCL();
 
     // инициируем переменные для обмена данными с OpenCL
-    #include "../world/@/init-buffer-cl.inl"
+    #include "../world/@/porte/init-buffer-cl.inl"
 
     // # Ядра OpenCL соберём по требованию.
 }
@@ -99,7 +100,7 @@ inline void Engine::emitEvent( int n ) {
 
 
     // читаем результат
-    #include "../world/@/read-buffer-cl.inl"
+    #include "../world/@/porte/read-buffer-cl.inl"
 }
 
 
@@ -173,7 +174,7 @@ inline void Engine::compileCLKernel(
     std::vector< std::string > hcl = boost::assign::list_of
         ( CL_WORLD_PATH_BATTLEGROUND + "/pragma.hcl" )
         ( CL_WORLD_PATH_BATTLEGROUND + "/restruct.hcl" )
-        ( CL_WORLD_PATH_BATTLEGROUND + "/_.hcl" )
+        ( CL_WORLD_PATH_BATTLEGROUND + "/portulan/struct.hcl" )
     ;
     hcl.insert( hcl.end(), includeHCL.cbegin(), includeHCL.cend() );
     for (auto itr = hcl.cbegin(); itr != hcl.cend(); ++itr) {
@@ -325,7 +326,7 @@ inline std::string Engine::commonConstantCLKernel() {
         //<< " -D GPU_OPENCL"
 
         // добавим констант от графов
-        #include "../world/@/constant-cl.inl"
+        #include "../world/@/porte/constant-cl.inl"
 
         // #! Если для вычислений не используется double, важно передавать
         //    вещественные значения как float. Иначе на драйвере OpenCL 1.2

@@ -34,7 +34,7 @@
 #define __attribute__(x) /*nothing*/
 
 
-#include "../world/@/_.hcl"
+#include "../portulan/Portulan.h"
 
 
 namespace battleground {
@@ -45,7 +45,9 @@ namespace battleground {
 *
 * # Движок параметризируется файлом '_.h'.
 */
-class Engine {
+class Engine :
+    public std::enable_shared_from_this< Engine >
+{
 public:
     Engine();
 
@@ -55,12 +57,24 @@ public:
 
 
 
+    inline std::shared_ptr< const Portulan >  portulan() const {
+        return mPortulan;
+    }
+
+
+    inline std::shared_ptr< Portulan >  portulan() {
+        return mPortulan;
+    }
+
+
+
+
     /**
     * Методы для воплощения элементов и их наборов.
     * Генерируются при формировании мира из графов.
     */
-    #include "../world/@/method-incarnate-element.inl"
-    #include "../world/@/method-incarnate-set.inl"
+    #include "../world/@/porte/method-incarnate-element.inl"
+    #include "../world/@/porte/method-incarnate-set.inl"
 
 
 
@@ -181,21 +195,13 @@ private:
 
 
 
-    /**
-    * Резервируем место для элементов в куче.
-    * Инициализируем структуры элементов нулями.
-    */
-    template< class T, size_t N >
-    static inline std::unique_ptr< T >  createContent() {
-        std::unique_ptr< T >  content( new T[ N ] );
-        std::memset( content.get(),  0,  sizeof( T ) * N );
-        return std::move( content );
-    }
-
-
-
-
 private:
+    /**
+    * Портулан для движка.
+    */
+    std::shared_ptr< Portulan >  mPortulan;
+
+
     /**
     * Сколько пульсов прожила система.
     *
@@ -224,7 +230,7 @@ private:
     // # Общедоступны, чтобы сейчас? не заморачиваться с методами. @todo?
 public:
     // подключаем переменные для обмена с OpenCL
-    #include "../world/@/enum-buffer-cl.inl"
+    #include "../world/@/porte/enum-buffer-cl.inl"
 
 };
 

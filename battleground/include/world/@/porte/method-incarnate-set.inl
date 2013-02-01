@@ -12,7 +12,7 @@ inline void Engine::incarnateSet(
 ) {
     // набор 'a'
     if (set == "a") {
-        #include "../@/incarnation/a/incarnate-element.inl"
+        #include "../incarnation/a/incarnate-element.inl"
 
     } else {
         throw porte::Exception( "Set for incarnate is undefined." );
