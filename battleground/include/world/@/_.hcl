@@ -5,7 +5,10 @@
 
 // # Типы данных С++ переопределены в restruct.hcl.
 // # Здесь определяем некоторые "особые" для C++.
-typedef cl_bool  bool_t;
+
+// # Для булева типа нельзя использовать cl_bool, если хотим видеть
+//   в структуре естественный bool вместо unsigned int от OpenCL.
+typedef bool  bool_t;
 
 typedef cl_float    real_t;
 typedef cl_float2   real2_t;
@@ -14,6 +17,7 @@ typedef cl_float4   real4_t;
 
 typedef real3_t  coord_t;
 typedef real3_t  direction_t;
+typedef real3_t  extent_t;
 
 
 
@@ -29,7 +33,7 @@ typedef cl_int  uid_t;
 * Модификаторы характеристик.
 */
 // булевый модификатор - это инверсия, если модификатор принял значение true
-typedef cl_bool  _bool_t;
+typedef bool  _bool_t;
 
 // модификатор числа - это пара значенй
 //   1 для прибавления к базовой характеристике
@@ -45,6 +49,8 @@ typedef real3_t  _coord_t[ 2 ];
 // второе значение - это % (непер) поворота на 360: 0 градусов = 1.0 (0%),
 // плюс - против часовой, минус - по часовой
 typedef real3_t  _direction_t[ 2 ];
+
+typedef real3_t  _extent_t[ 2 ];
 
 
 
@@ -78,17 +84,21 @@ const _coord_t DEFAULT_MODIFICATOR_COORD_2K = { { 0, 0, 0 },  { 1, 1, 1 } };
 const direction_t  DEFAULT_DIRECTION = { 0, 0, 0 };
 const _direction_t DEFAULT_MODIFICATOR_DIRECTION_2K = { { 0, 0, 0 },  { 1, 1, 1 } };
 
+const extent_t  DEFAULT_EXTENT = { 0, 0, 0 };
+const _extent_t DEFAULT_MODIFICATOR_EXTENT_2K = { { 0, 0, 0 },  { 1, 1, 1 } };
+
+
 
 
 /**
-* Группы элементов мира.
+* Виды элементов мира.
 *
-* # Разбиты на "характеристики" и "действия" для оптимизации чтения/записи
-*   OpenCL.
+* # Разбиты на "характеристики" и "действия" для оптимизации
+*   чтения/записи OpenCL.
 * # Упорядочены по алфавиту.
 */
 // ВОИН
-typedef struct {
+typedef struct __attribute__ ((packed)) {
     // обязательные
     uid_t uid;
 
@@ -108,7 +118,7 @@ typedef struct {
 } characteristicWarrior_t;
 
 
-typedef struct {
+typedef struct __attribute__ ((packed)) {
     action_t  turnSword;
     action_t  wait;
     action_t  intoCombatPosition;
@@ -124,18 +134,18 @@ typedef struct {
 
 
 // ПОЛЕ БИТВЫ
-typedef struct {
+typedef struct __attribute__ ((packed)) {
     // обязательные
     uid_t uid;
 
     // дополнительные
-    real3_t   size;
-    _real3_t  _size;
+    extent_t   extent;
+    _extent_t  _extent;
 
 } characteristicBattleground_t;
 
 
-typedef struct {
+typedef struct __attribute__ ((packed)) {
     action_t  verifyCoord;
     action_t  cancelCoord;
 } actionBattleground_t;

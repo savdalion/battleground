@@ -7,10 +7,10 @@ inline Engine::Engine(
     mLastUID( 0 ),
     errorCL( CL_SUCCESS )
 {
-    // Подготавливаем контекст и очередь команд для работы с OpenCL
+    // подготавливаем контекст и очередь команд для работы с OpenCL
     prepareCL();
 
-    // Инициируем переменные для обмена данными с OpenCL
+    // инициируем переменные для обмена данными с OpenCL
     #include "../world/@/init-buffer-cl.inl"
 
     // # Ядра OpenCL соберём по требованию.
@@ -20,16 +20,6 @@ inline Engine::Engine(
 
 
 inline Engine::~Engine() {
-}
-
-
-
-
-inline void Engine::incarnate(
-    const std::string& kind,
-    const std::string& name
-) {
-    #include "../world/@/incarnate-element.inl"
 }
 
 
@@ -58,6 +48,7 @@ inline void Engine::pulse( int n ) {
     // выполняем 'n' циклов
     try {
         emitEvent( n );
+
     } catch ( cl::Error& ex ) {
         const std::string s =
             static_cast< std::string >( ex.what() ) +

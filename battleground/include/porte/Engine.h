@@ -10,8 +10,31 @@
 #include <string>
 #include <boost/unordered_map.hpp>
 #include <boost/assign.hpp>
+
+
+// #! Структуры OpenCL и C++ должны быть одинакового размера.
+//    Особое внимание стоит обратить на структуры, которые содержат
+//    вложенные структуры и атрибут "упаковать".
+#pragma pack( 1 )
+
+
+/**
+* # Структуры организованы т. о., чтобы не дублировать их при включении
+*   в код OpenCL. Поэтому даём неск. определений.
+*/
+#ifndef __constant
+#define __constant const
+#endif
+
+#ifndef __global
+#define __global /*nothing*/
+#endif
+
+// Выравнивание для VC++ не требуется
+#define __attribute__(x) /*nothing*/
+
+
 #include "../world/@/_.hcl"
-#include "Graph.h"
 
 
 namespace battleground {
@@ -33,11 +56,11 @@ public:
 
 
     /**
-    * Воплощает элемент с заданным именем.
-    * Структура элемента задаётся при формировании мира из графов, данные -
-    * загружается из файла.
+    * Методы для воплощения элементов и их наборов.
+    * Генерируются при формировании мира из графов.
     */
-    void incarnate( const std::string& kind,  const std::string& name );
+    #include "../world/@/method-incarnate-element.inl"
+    #include "../world/@/method-incarnate-set.inl"
 
 
 
@@ -198,6 +221,8 @@ private:
     cl_int errorCL;
 
 
+    // # Общедоступны, чтобы сейчас? не заморачиваться с методами. @todo?
+public:
     // подключаем переменные для обмена с OpenCL
     #include "../world/@/enum-buffer-cl.inl"
 

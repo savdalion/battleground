@@ -18,7 +18,7 @@ subgraph clusterType {
     edge [ color = "red" ];
 
 
-    "размер" -> "размер" [ label = "size3d" ];
+    "размер" -> "размер" [ label = "extent" ];
 
 } // subgraph clusterType
 

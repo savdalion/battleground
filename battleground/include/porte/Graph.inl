@@ -4,7 +4,9 @@ namespace battleground {
 inline Graph::Graph(
     const std::string& file
 ) :
-    mFile( file )
+    //mFile( file )
+    // @test
+    mFile( INCARNATION_WORLD_PATH_BATTLEGROUND + "/test.gv" )
 {
     assert( !mFile.empty()
         && "Файл не указан." );
@@ -13,19 +15,22 @@ inline Graph::Graph(
         throw porte::Exception( "File '" + mFile + "' is not found." );
     }
 
-    std::ifstream  in( mFile.c_str() );
-    if ( !in.is_open() ) {
+    // читаем граф с помощью Graphviz
+    FILE* fp = std::fopen( mFile.c_str(), "r" );
+    if ( !fp ) {
         throw porte::Exception( "File '" + mFile + "' is not open." );
     }
-    
-    boost::dynamic_properties dp;
-    const bool statusRead =
-        boost::read_graphviz( in, mGraph, dp, "node_id" );
-    if ( !statusRead ) {
-        throw porte::Exception( "Don't read graph '" + mFile + "'." );
-    }
+    GVC_t* gvc = gvContext();
+    gvc = gvContext();
+    graph_t* g = agread( fp );
 
-    in.close();
+    gvLayout( gvc, g, "dot" );
+    gvRender( gvc, g, "plain", stdout );
+    gvFreeLayout( gvc, g );
+    agclose( g );
+
+    // @todo Попробовать чистый проект с Graphviz, без GTest.
+
 }
 
 
