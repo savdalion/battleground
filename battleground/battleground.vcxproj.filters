@@ -66,6 +66,12 @@
     <ClInclude Include="include\portulan\Topology.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="include\io\ClanlibVisual.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="include\World.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="battleground\include\Engine.inl">
@@ -87,6 +93,12 @@
       <Filter>Заголовочные файлы</Filter>
     </None>
     <None Include="include\portulan\Topology.inl">
+      <Filter>Заголовочные файлы</Filter>
+    </None>
+    <None Include="include\io\ClanlibVisual.inl">
+      <Filter>Заголовочные файлы</Filter>
+    </None>
+    <None Include="include\World.inl">
       <Filter>Заголовочные файлы</Filter>
     </None>
   </ItemGroup>

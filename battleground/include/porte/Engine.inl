@@ -2,8 +2,9 @@ namespace battleground {
 
 
 inline Engine::Engine(
+    std::shared_ptr< Portulan >  p
 ) :
-    mPortulan( new Portulan() ),
+    mPortulan( p ),
     mLive(),
     mLastUID( 0 ),
     errorCL( CL_SUCCESS )

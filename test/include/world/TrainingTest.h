@@ -218,10 +218,8 @@ public:
 protected:
     inline TrainingTest(
     ) :
-        // Инициализируем движок поля битвы
-        // # Движок оборачиваем в shared_ptr, т.к. он может отдаваться как
-        //   слушатель событий другим движкам.
-        mEngine( new Engine() )
+        // Инициализируем мир поля битвы
+        mWorld( World::valueOf() )
     {
     }
 
@@ -245,15 +243,15 @@ protected:
 
 
 
-    inline std::shared_ptr< Engine >  engine() {
-        return mEngine;
+    inline std::shared_ptr< World >  world() {
+        return mWorld;
     }
 
 
 
 
 private:
-    std::shared_ptr< Engine >    mEngine;
+    std::shared_ptr< World >    mWorld;
 };
 
 

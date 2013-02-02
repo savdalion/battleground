@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../../configure.h"
 #include <CL/cl.hpp>
 #include <porte/include/porte/CL.h>
 #include <porte/include/porte/Pulse.h>
@@ -10,30 +11,6 @@
 #include <string>
 #include <boost/unordered_map.hpp>
 #include <boost/assign.hpp>
-
-
-// #! Структуры OpenCL и C++ должны быть одинакового размера.
-//    Особое внимание стоит обратить на структуры, которые содержат
-//    вложенные структуры и атрибут "упаковать".
-#pragma pack( 1 )
-
-
-/**
-* # Структуры организованы т. о., чтобы не дублировать их при включении
-*   в код OpenCL. Поэтому даём неск. определений.
-*/
-#ifndef __constant
-#define __constant const
-#endif
-
-#ifndef __global
-#define __global /*nothing*/
-#endif
-
-// Выравнивание для VC++ не требуется
-#define __attribute__(x) /*nothing*/
-
-
 #include "../portulan/Portulan.h"
 
 
@@ -49,7 +26,7 @@ class Engine :
     public std::enable_shared_from_this< Engine >
 {
 public:
-    Engine();
+    Engine( std::shared_ptr< Portulan > );
 
 
     virtual ~Engine();
@@ -58,12 +35,14 @@ public:
 
 
     inline std::shared_ptr< const Portulan >  portulan() const {
-        return mPortulan;
+        assert( !mPortulan.expired() );
+        return mPortulan.lock();
     }
 
 
     inline std::shared_ptr< Portulan >  portulan() {
-        return mPortulan;
+        assert( !mPortulan.expired() );
+        return mPortulan.lock();
     }
 
 
@@ -199,7 +178,7 @@ private:
     /**
     * Портулан для движка.
     */
-    std::shared_ptr< Portulan >  mPortulan;
+    std::weak_ptr< Portulan >  mPortulan;
 
 
     /**

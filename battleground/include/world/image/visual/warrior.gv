@@ -1,0 +1,68 @@
+﻿// Визуальные образы для воина.
+
+// # Название образа записывается строчными буквами.
+digraph Visual {
+
+
+color = "lightgrey";
+concentrate = true;
+clusterrank = "global";
+edge [ fontsize = 10 ];
+
+
+// Спрайты для воина.
+subgraph clusterSprite {
+
+    node [ shape = "box", color = "bisque", fontsize = 10 ];
+    edge [ color = "bisque" ];
+
+
+    // простые спрайты
+    "Основа"
+        [ image = "library/dc/player/base/human_f.png" ];
+    "Тело"
+        [ image = "library/dc/player/body/chainmail3.png" ];
+    "Ноги"
+        [ image = "library/dc/player/legs/leg_armor02.png" ];
+    "Ботинки"
+        [ image = "library/dc/player/boots/long_white.png" ];
+    "Белые перчатки"
+        [ image = "library/dc/player/gloves/glove_white.png" ];
+    "Красные перчатки"
+        [ image = "library/dc/player/gloves/glove_red.png" ];
+    "Меч вверх"
+        [ image = "library/dc/player/hand1/boromir.png" ];
+    "Меч в готовности"
+        [ image = "library/dc/player/hand1/great_sword_slant.png" ];
+    "Потерянное снаряжение"
+        [ image = "library/dc/misc/unseen_item.png" ];
+    "Сигнал в виде меча (левый верхний угол)"
+        [ image = "library/dc/misc/icons/animated_weapon.png" ];
+    "Сигнал в виде меча (правый нижний угол)"
+        [ image = "library/dc/item/rod/i-rod_striking.png" ];
+    "Сигнал в виде вопроса (правый верхний угол)"
+        [ image = "library/dc/misc/icons/may_stab_brand.png" ];
+    "Сигнал в виде восклицания (правый верхний угол)"
+        [ image = "library/dc/misc/icons/fleeing.png" ];
+    "Zz (правый верхний угол)"
+        [ image = "library/dc/misc/icons/sleeping.png" ];
+    "Красное свечение над головой"
+        [ image = "library/dc/player/hair/short_red.png" ];
+    "Белое свечение над головой"
+        [ image = "library/dc/player/hair/short_white.png" ];
+
+
+    // составные спрайты
+    "Вольная стойка" -> { "Основа" "Тело" "Ноги" "Ботинки" "Белые перчатки" };
+    // меч появляется только когда он есть у воина
+    "Вольная стойка" -> "Меч вверх" [ label = "меч == true" ];
+
+    "Боевая стойка" -> { "Основа" "Тело" "Ноги" "Ботинки" "Красные перчатки" };
+    // меч появляется только когда он есть у воина
+    "Боевая стойка" -> "Меч в готовности" [ label = "меч == true" ];
+
+
+} // subgraph clusterSprite
+
+
+} // digraph Characteristic

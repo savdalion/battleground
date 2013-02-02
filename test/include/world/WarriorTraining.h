@@ -43,19 +43,21 @@ TEST_F( WarriorTT,  SingleWarriorSingleStrategy_TrainingSingleSwordTurn ) {
 #if 1
 
     // подготовка
-    engine()->incarnateSet( "a" );
+    world()->engine()->incarnateSet( "a" );
 
-    const auto pt = engine()->portulan()->topology();
+    const auto p = world()->engine()->portulan();
+    const auto pt = p->topology();
 
-
-
-    // покажем результат
-    // @todo ...
-    
 
     // запускаем мир
     // задаём такое кол-во шагов, чтобы воин успел потренироваться
-    // @todo ...
+    static const int needStep = 10 * 100000;
+    static const bool closeWindow = true;
+    static const bool showPulse = true;
+    world()->go< 1000, PULSE, needStep, closeWindow, showPulse >();
+
+    // сколько пульсов отработал движок
+    const auto PL = world()->engine()->live().pulselive();
 
 
     // проверяем результат

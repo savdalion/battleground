@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../../configure.h"
 #include "../world/@/portulan/struct.hcl"
 
 

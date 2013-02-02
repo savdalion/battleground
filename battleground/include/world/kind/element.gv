@@ -1,0 +1,48 @@
+﻿// @see Прим. к strategy.gv.
+
+
+// Элементы портулана.
+digraph Element {
+
+
+color = "lightgrey";
+concentrate = true;
+clusterrank = "global";
+edge [ shape = "polygon" ];
+edge [ fontsize = 10 ];
+
+
+// Размеры групп элементов (макс. кол-во элементов).
+subgraph clusterCount {
+
+    edge [ color = "red" ];
+
+
+    "ПОЛЕ БИТВЫ" -> "ПОЛЕ БИТВЫ" [ label = "1" ];
+    "ВОИН" -> "ВОИН" [ label = "100" ];
+
+} // subgraph clusterCount
+
+
+
+
+
+
+
+
+// Внутренние названия элементов портулана.
+// # Названия элементов записываются прописными буквами.
+// # Элементы хранятся в папках, соотв. названию, но строчными буквами.
+subgraph clusterInnerName {
+
+    edge [ color = "gray" ];
+
+
+    // перечисляем все элементы (группы элементов) портулана
+    "ПОЛЕ БИТВЫ" -> "ПОЛЕ БИТВЫ" [ label = "BATTLEGROUND" ];
+    "ВОИН"       -> "ВОИН"       [ label = "WARRIOR" ];
+
+} // subgraph clusterInnerName
+
+
+} // digraph Element
