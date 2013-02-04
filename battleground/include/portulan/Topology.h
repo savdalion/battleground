@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../configure.h"
+#include "../image/ClanlibVisualImage.h"
 #include "../world/@/portulan/struct.hcl"
 
 
@@ -42,9 +43,9 @@ private:
 
     // # Общедоступны, чтобы сейчас? не заморачиваться с методами. @todo?
 public:
-    // подключаем переменные для обмена с OpenCL
+    // подключаем переменные для обмена с OpenCL и
+    // для создания образов топологии
     #include "../world/@/portulan/enum-topology.inl"
-
 };
 
 

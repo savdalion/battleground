@@ -1,0 +1,24 @@
+﻿// @see turnSword.gv
+
+digraph Visual {
+
+label = "Воин. Тренировка. Вращение одноручным мечом. В боевую стойку.";
+
+
+color = "lightgrey";
+concentrate = true;
+clusterrank = "global";
+edge [ fontsize = 10 ];
+
+
+subgraph clusterSprite {
+
+    node [ shape = "box", color = "bisque", fontsize = 10 ];
+    edge [ color = "bisque" ];
+
+    "*" -> "Zz (правый верхний угол)" [ label = "+" ];
+
+} // subgraph clusterSprite
+
+
+} // digraph Visual

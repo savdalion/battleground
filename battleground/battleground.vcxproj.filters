@@ -72,6 +72,15 @@
     <ClInclude Include="include\World.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="include\image\ClanlibManagerFrame.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="include\image\ClanlibManagerFrame.inl">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="include\image\ClanlibSprite.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="battleground\include\Engine.inl">
@@ -98,7 +107,7 @@
     <None Include="include\io\ClanlibVisual.inl">
       <Filter>Заголовочные файлы</Filter>
     </None>
-    <None Include="include\World.inl">
+    <None Include="include\image\ClanlibSprite.inl">
       <Filter>Заголовочные файлы</Filter>
     </None>
   </ItemGroup>

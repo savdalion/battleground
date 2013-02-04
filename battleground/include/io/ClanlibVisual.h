@@ -26,6 +26,7 @@
 #include <ClanLib/gl.h>
 #endif
 
+#include "ManagerSprite.h"
 #include "../portulan/Portulan.h"
 
 
@@ -68,6 +69,18 @@ public:
 
     inline std::shared_ptr< CL_DisplayWindow >  displayWindow() {
         return mDisplayWindow;
+    }
+
+
+
+
+    inline const ManagerSprite* managerSprite() const {
+        return mManagerSprite.get();
+    }
+
+
+    inline ManagerSprite* managerSprite() {
+        return mManagerSprite.get();
     }
 
 
@@ -125,11 +138,6 @@ public:
 
 
 protected:
-    //virtual void draw( const ... );
-
-
-
-
     /**
     * @return Кадры в секунду (Frame Per Second).
     */
@@ -149,6 +157,7 @@ protected:
     */
     std::shared_ptr< CL_DisplayWindow >  mDisplayWindow;
 
+    static std::unique_ptr< ManagerSprite >  mManagerSprite;
 
     /**
     * Текущее время, мс.
