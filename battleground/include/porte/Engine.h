@@ -52,7 +52,7 @@ public:
     * Методы для воплощения элементов и их наборов.
     * Генерируются при формировании мира из графов.
     */
-    #include "../world/@/porte/method-incarnate-element.inl"
+    #include "../world/@/porte/method-incarnate-kind.inl"
     #include "../world/@/porte/method-incarnate-set.inl"
 
 
@@ -80,8 +80,10 @@ public:
 
     /**
     * Изменение карты движком.
+    *
+    * @param timestep Сколько времени должно пройти в мире.
     */
-    void pulse( int n );
+    void pulse( real_t timestep );
 
 
 
@@ -117,7 +119,7 @@ public:
 
 
 private:
-    void emitEvent( int n );
+    void emitEvent( real_t timestep );
 
 
 
@@ -184,7 +186,7 @@ private:
     /**
     * Сколько пульсов прожила система.
     *
-    * Если шаг времени (mTimestep) не меняется движком, время жизни =
+    * Если шаг времени не меняется движком, время жизни =
     * = шаг * количество прожитых пульсов.
     */
     porte::Pulse mLive;

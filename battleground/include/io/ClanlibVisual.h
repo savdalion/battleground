@@ -26,7 +26,7 @@
 #include <ClanLib/gl.h>
 #endif
 
-#include "ManagerSprite.h"
+#include "image/ClanlibManagerSprite.h"
 #include "../portulan/Portulan.h"
 
 
@@ -69,6 +69,30 @@ public:
 
     inline std::shared_ptr< CL_DisplayWindow >  displayWindow() {
         return mDisplayWindow;
+    }
+
+
+
+
+    inline CL_GraphicContext const&  gc() const {
+        return mDisplayWindow->get_gc();
+    }
+
+
+    inline CL_GraphicContext&  gc() {
+        return mDisplayWindow->get_gc();
+    }
+
+
+
+
+    inline CL_InputContext const&  ic() const {
+        return mDisplayWindow->get_ic();
+    }
+
+
+    inline CL_InputContext&  ic() {
+        return mDisplayWindow->get_ic();
     }
 
 
@@ -137,7 +161,6 @@ public:
 
 
 
-protected:
     /**
     * @return Кадры в секунду (Frame Per Second).
     */
@@ -157,7 +180,7 @@ protected:
     */
     std::shared_ptr< CL_DisplayWindow >  mDisplayWindow;
 
-    static std::unique_ptr< ManagerSprite >  mManagerSprite;
+    std::unique_ptr< ManagerSprite >  mManagerSprite;
 
     /**
     * Текущее время, мс.

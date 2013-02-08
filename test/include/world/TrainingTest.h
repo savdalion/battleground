@@ -10,23 +10,23 @@ namespace battleground {
 /**
 * # Время - измерение, проходящее сквозь все портуланы. Указывается в секундах.
 */
-static const double SECOND     = 1.0;
-static const double MINUTE     = SECOND * 60.0;
-static const double HOUR       = MINUTE * 60.0;
-static const double DAY        = HOUR   * 24.0;
-static const double HALF_DAY   = DAY    / 2.0;
-static const double WEEK       = DAY    * 7.0;
-static const double MONTH      = DAY    * 30.0;
-static const double HALF_MONTH = MONTH  / 2.0;
-static const double YEAR       = DAY    * 365.0;
-static const double HALF_YEAR  = YEAR   / 2.0;
+static const real_t SECOND     = 1.0f;
+static const real_t MINUTE     = SECOND * 60.0f;
+static const real_t HOUR       = MINUTE * 60.0f;
+static const real_t DAY        = HOUR   * 24.0f;
+static const real_t HALF_DAY   = DAY    / 2.0f;
+static const real_t WEEK       = DAY    * 7.0f;
+static const real_t MONTH      = DAY    * 30.0f;
+static const real_t HALF_MONTH = MONTH  / 2.0f;
+static const real_t YEAR       = DAY    * 365.0f;
+static const real_t HALF_YEAR  = YEAR   / 2.0f;
 
 
 /**
 * Влияет на точность рассчётов (больше - ниже).
 * Может быть задействован вместе с 'PULSE'.
 */
-static const double TIMESTEP = SECOND;
+static const real_t TIMESTEP = SECOND;
 
 
 /*

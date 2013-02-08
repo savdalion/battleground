@@ -57,9 +57,6 @@
     <ClInclude Include="include\porte\Engine.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="include\porte\Graph.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
     <ClInclude Include="include\portulan\Portulan.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
@@ -72,13 +69,13 @@
     <ClInclude Include="include\World.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="include\image\ClanlibManagerFrame.h">
+    <ClInclude Include="include\io\image\ClanlibManagerFrame.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="include\image\ClanlibManagerFrame.inl">
+    <ClInclude Include="include\io\image\ClanlibManagerFrame.inl">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="include\image\ClanlibSprite.h">
+    <ClInclude Include="include\io\image\ClanlibManagerSprite.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>
@@ -98,16 +95,16 @@
     <None Include="include\porte\Engine.inl">
       <Filter>Заголовочные файлы</Filter>
     </None>
-    <None Include="include\porte\Graph.inl">
-      <Filter>Заголовочные файлы</Filter>
-    </None>
     <None Include="include\portulan\Topology.inl">
       <Filter>Заголовочные файлы</Filter>
     </None>
     <None Include="include\io\ClanlibVisual.inl">
       <Filter>Заголовочные файлы</Filter>
     </None>
-    <None Include="include\image\ClanlibSprite.inl">
+    <None Include="include\io\image\ClanlibManagerSprite.inl">
+      <Filter>Заголовочные файлы</Filter>
+    </None>
+    <None Include="include\World.inl">
       <Filter>Заголовочные файлы</Filter>
     </None>
   </ItemGroup>

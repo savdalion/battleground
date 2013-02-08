@@ -14,11 +14,11 @@ characteristicWarriorBCL = cl::Buffer(
     pt->characteristicWarriorContentPtr.get(),
     &errorCL
 );
-actionWarriorBCL = cl::Buffer(
+strategyWarriorBCL = cl::Buffer(
     contextCL(),
     CL_MEM_USE_HOST_PTR | CL_MEM_READ_WRITE,
-    sizeof( actionWarrior_t ) * WARRIOR_COUNT,
-    pt->actionWarriorContentPtr.get(),
+    sizeof( strategyWarrior_t ) * WARRIOR_COUNT,
+    pt->strategyWarriorContentPtr.get(),
     &errorCL
 );
 
@@ -31,10 +31,10 @@ characteristicBattlegroundBCL = cl::Buffer(
     pt->characteristicBattlegroundContentPtr.get(),
     &errorCL
 );
-actionBattlegroundBCL = cl::Buffer(
+strategyBattlegroundBCL = cl::Buffer(
     contextCL(),
     CL_MEM_USE_HOST_PTR | CL_MEM_READ_WRITE,
-    sizeof( actionBattleground_t ) * BATTLEGROUND_COUNT,
-    pt->actionBattlegroundContentPtr.get(),
+    sizeof( strategyBattleground_t ) * BATTLEGROUND_COUNT,
+    pt->strategyBattlegroundContentPtr.get(),
     &errorCL
 );

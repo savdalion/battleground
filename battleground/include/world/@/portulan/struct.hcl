@@ -56,10 +56,40 @@ typedef real3_t  _extent_t[ 2 ];
 
 
 /**
-* Действие элемента.
-* # Лежит в диапазоне [ 0.0 не выполняется .. 0.n выполняется .. 1.0 выполнено ].
+* Статистика выполнения действия или стратегии.
 */
-typedef real_t action_t;
+typedef struct __attribute__ ((packed)) {
+    /**
+    * На сколько действие (или стратегия) выполнено.
+    *
+    * # Лежит в диапазоне [ <= 0.0 не выполняется .. выполняется .. >= 1.0 выполнено ].
+    */
+    real_t progress;
+
+    /**
+    * Сколько раз было завершено действие (или стратегия).
+    */
+    cl_uint count;
+
+} statisticsDo_t;
+
+
+
+
+
+/**
+* Действие.
+*/
+typedef struct __attribute__ ((packed)) {
+    /**
+    * Длительность действия, c.
+    * Задаётся в виде диапазона значений.
+    */
+    real_t duration[ 2 ];
+
+    statisticsDo_t statistics;
+
+} action_t;
 
 
 
@@ -118,17 +148,39 @@ typedef struct __attribute__ ((packed)) {
 } characteristicWarrior_t;
 
 
+/**
+* Стратегии воина.
+*/
+// Тренировка / С одноручным мечом / Вращение меча
 typedef struct __attribute__ ((packed)) {
-    action_t  turnSword;
-    action_t  wait;
-    action_t  intoCombatPosition;
-    action_t  intoFreePosition;
-    action_t  pickUpSword;
-    action_t  decisionTurnSword;
-    action_t  plunkSword;
-    action_t  swear;
-    action_t  concentrate;
-} actionWarrior_t;
+    action_t  Concentrate;
+    action_t  DecisionTurnSword;
+    action_t  IntoCombatPosition;
+    action_t  IntoFreePosition;
+    action_t  PickUpSword;
+    action_t  PlunkSword;
+    action_t  Swear;
+    action_t  TurnSword;
+    action_t  Wait;
+} strategyWarriorTurn_t;
+
+
+typedef struct __attribute__ ((packed)) {
+    strategyWarriorTurn_t Turn;
+    statisticsDo_t statistics;
+} strategyWarriorSingleSword_t;
+
+
+typedef struct __attribute__ ((packed)) {
+    strategyWarriorSingleSword_t SingleSword;
+    statisticsDo_t statistics;
+} strategyWarriorTraining_t;
+
+
+typedef struct __attribute__ ((packed)) {
+    strategyWarriorTraining_t Training;
+    statisticsDo_t statistics;
+} strategyWarrior_t;
 
 
 /**
@@ -139,7 +191,7 @@ typedef struct __attribute__ ((packed)) {
 */
 typedef struct __attribute__ ((packed)) {
     characteristicWarrior_t  characteristic[ 2 ];
-    actionWarrior_t          action[ 2 ];
+    strategyWarrior_t        strategy[ 2 ];
 } roughlyStateWarrior_t;
 
 
@@ -158,9 +210,21 @@ typedef struct __attribute__ ((packed)) {
 
 
 typedef struct __attribute__ ((packed)) {
-    action_t  verifyCoord;
-    action_t  cancelCoord;
-} actionBattleground_t;
+    action_t  CancelCoord;
+    action_t  VerifyCoord;
+} strategyBattlegroundCommon_t;
+
+
+typedef struct __attribute__ ((packed)) {
+    strategyBattlegroundCommon_t Common;
+    statisticsDo_t statistics;
+} strategyBattleground_t;
+
+
+typedef struct __attribute__ ((packed)) {
+    characteristicBattleground_t  characteristic[ 2 ];
+    strategyBattleground_t        strategy[ 2 ];
+} roughlyStateBattleground_t;
 
 
 
@@ -185,11 +249,11 @@ typedef struct {
 */
 const cl_uint WARRIOR_COUNT = 100;
 typedef characteristicWarrior_t*  characteristicWarriorContent_t;
-typedef actionWarrior_t*  actionWarriorContent_t;
+typedef strategyWarrior_t*  strategyWarriorContent_t;
 
 const cl_uint BATTLEGROUND_COUNT = 1;
 typedef characteristicBattleground_t*  characteristicBattlegroundContent_t;
-typedef actionBattleground_t*  actionBattlegroundContent_t;
+typedef strategyBattleground_t*  strategyBattlegroundContent_t;
 
 
 

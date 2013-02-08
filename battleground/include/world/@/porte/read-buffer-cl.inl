@@ -13,11 +13,11 @@ queueCL().enqueueReadBuffer(
     pt->characteristicWarriorContentPtr.get()
 );
 queueCL().enqueueReadBuffer(
-    actionWarriorBCL,
+    strategyWarriorBCL,
     CL_TRUE,
     0,
-    sizeof( actionWarrior_t ) * WARRIOR_COUNT,
-    pt->actionWarriorContentPtr.get()
+    sizeof( strategyWarrior_t ) * WARRIOR_COUNT,
+    pt->strategyWarriorContentPtr.get()
 );
 
 
@@ -31,11 +31,11 @@ queueCL().enqueueReadBuffer(
     pt->characteristicBattlegroundContentPtr.get()
 );
 queueCL().enqueueReadBuffer(
-    actionBattlegroundBCL,
+    strategyBattlegroundBCL,
     CL_TRUE,
     0,
-    sizeof( actionBattleground_t ) * BATTLEGROUND_COUNT,
-    pt->actionBattlegroundContentPtr.get()
+    sizeof( strategyBattleground_t ) * BATTLEGROUND_COUNT,
+    pt->strategyBattlegroundContentPtr.get()
 );
 
 

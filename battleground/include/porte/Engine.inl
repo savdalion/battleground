@@ -27,15 +27,15 @@ inline Engine::~Engine() {
 
 
 
-inline void Engine::pulse( int n ) {
+inline void Engine::pulse( real_t timestep ) {
 
-    assert( (n > 0)
-        && "Умеем работать только с натуральным кол-вом пульсов." );
+    assert( (timestep > 0.0f)
+        && "Умеем работать только с натуральным временем в секундах." );
 
     // рассчитываем воздействия на тела звёздной системы
     // # Все элементы портулана работают по единой схеме.
     // # Каждый элемент генерирует свой набор событий. Причём, события
-    //   генерируюся в непрерывном времени - см. комм. в графах '*.gv'.
+    //   генерируюся в непрерывном времени - см. комм. в графах.
     // # Испускаемые элементом события хранятся самим элементом.
     // # Событие может изменить как сам элемент, так и др. элементы. Поэтому,
     //   после "испускания" события каждый элемент просматривает др. элементы
@@ -47,9 +47,9 @@ inline void Engine::pulse( int n ) {
     //   на их основе конкретные (свои) события. Побочный эффект: меньше
     //   загрузка памяти общих событий, ускорение обработки.
 
-    // выполняем 'n' циклов
+    // излучаем события за заданный период времени
     try {
-        emitEvent( n );
+        emitEvent( timestep );
 
     } catch ( cl::Error& ex ) {
         const std::string s =
@@ -63,22 +63,24 @@ inline void Engine::pulse( int n ) {
 
 
 
-inline void Engine::emitEvent( int n ) {
+inline void Engine::emitEvent( real_t timestep ) {
 
     // @todo fine clEnqueueMigrateMemObjects() для актуализации структур.
 
 
-    // выполним 'n' пульсов
-    for (int p = 0; p < n; ++p) {
+    // пульсируем, аппроксимируя непрерывность времени 'timestep'
+    const real_t dt =
+        timestep / static_cast< real_t >( APPROXIMATE_TIMESTEP );
+    for (size_t p = 0; p < APPROXIMATE_TIMESTEP; ++p) {
 
         // # Перед началом каждого пульса и в конце него элементы -
         //   упорядочены (оптимизированы). См. старания ниже.
 
-        const cl_long pulselive = mLive.pulselive();
+        const auto timelive = mLive.timelive();
 
 
         // просмотрим память всех элементов и отработаем все запланированные
-        // ими стратегии
+        // ими действия (в рамках стратегий)
 
 
         // подготавливаем элементы к созданию событий
@@ -94,7 +96,7 @@ inline void Engine::emitEvent( int n ) {
         // # В этом месте очередь событий завершена.
 
         // мир становится старше
-        mLive.inc( TIMESTEP );
+        mLive.inc( dt );
 
     } // for (int p = 0 ...
 
@@ -207,7 +209,7 @@ inline void Engine::compileCLKernel(
         const std::string kernelName =
             itr->substr( itr->find_last_of( '/' ) + 1 );
 
-        // Program Setup
+        // program setup
         const std::string fileKernel = kernelKey + ".cl";
         const std::string pathAndName =
             CL_WORLD_PATH_BATTLEGROUND + "/" + fileKernel;

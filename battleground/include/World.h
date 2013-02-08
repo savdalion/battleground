@@ -89,7 +89,7 @@ public:
         bool closeWindow,
         bool showPulse
     >
-    void go();
+    void go( real_t timestep );
 
 
 
@@ -121,6 +121,8 @@ private:
     * Отображаемый мир.
     */
     std::shared_ptr< ClanlibVisual >  mVisual;
+
+    size_t mCurrentTime;
 };
 
 

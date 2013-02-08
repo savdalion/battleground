@@ -2,5 +2,5 @@
 // @see ClanlibVisual::operator<<()
 
 
-#include "../world/@/io/ClanlibVisual/element/warrior.inl"
-//#include "ClanlibVisual/battlefield.inl"
+#include "../world/@/io/ClanlibVisual/kind/warrior.inl"
+//#include "../world/@/io/ClanlibVisual/kind/battleground.inl"

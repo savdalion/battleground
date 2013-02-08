@@ -5,6 +5,8 @@ inline ClanlibVisual::ClanlibVisual(
     const option_t& o
 ) :
     mOption( o ),
+    mDisplayWindow(),
+    mManagerSprite(),
     mCurrentTime( 0 )
 {
     // @source Example "SpritesRTS" from http://clanlib.org
@@ -29,6 +31,14 @@ inline ClanlibVisual::ClanlibVisual(
 	mDisplayWindow = std::shared_ptr< CL_DisplayWindow >(
         new CL_DisplayWindow( desc )
     );
+
+    std::unique_ptr< ManagerSprite >  ms(
+        new ManagerSprite( mDisplayWindow )
+    );
+    mManagerSprite = std::move( ms );
+
+    // # „тобы не создавать "пробрасывающие методы", образы мира
+    //   инициируютс€ в менеджерах - ClanlibManagerSprite.
 }
 
 
@@ -40,8 +50,6 @@ inline ClanlibVisual::~ClanlibVisual() {
 
 
 
-
-
 inline ClanlibVisual& ClanlibVisual::operator<<(
     const Portulan&  portulan
 ) {
@@ -49,6 +57,9 @@ inline ClanlibVisual& ClanlibVisual::operator<<(
 
     // размещаем на холсте элементы портулана
     #include "../world/@/io/ClanlibVisual/draw.inl"
+
+    mDisplayWindow->flip( 1 );
+    CL_KeepAlive::process();
 
     return *this;
 }

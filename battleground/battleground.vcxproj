@@ -24,12 +24,11 @@
     <ClInclude Include="battleground\include\Engine.h" />
     <ClInclude Include="heat-transfer\include\HeatTransfer.h" />
     <ClInclude Include="include\battleground\Engine.h" />
+    <ClInclude Include="include\io\image\ClanlibManagerSprite.h" />
     <ClInclude Include="include\io\ClanlibVisual.h" />
-    <ClInclude Include="include\image\ClanlibSprite.h" />
-    <ClInclude Include="include\image\ClanlibManagerFrame.h" />
-    <ClInclude Include="include\porte\Graph.h" />
+    <ClInclude Include="include\io\image\ClanlibManagerFrame.h" />
     <ClInclude Include="include\porte\Engine.h" />
-    <ClInclude Include="include\image\ClanlibManagerFrame.inl" />
+    <ClInclude Include="include\io\image\ClanlibManagerFrame.inl" />
     <ClInclude Include="include\portulan\Portulan.h" />
     <ClInclude Include="include\portulan\Topology.h" />
     <ClInclude Include="include\World.h" />
@@ -39,11 +38,11 @@
     <None Include="include\battleground\PortulanBooster.inl" />
     <None Include="battleground\include\Engine.inl" />
     <None Include="heat-transfer\include\HeatTransfer.inl" />
+    <None Include="include\io\image\ClanlibManagerSprite.inl" />
     <None Include="include\io\ClanlibVisual.inl" />
-    <None Include="include\image\ClanlibSprite.inl" />
     <None Include="include\porte\Engine.inl" />
-    <None Include="include\porte\Graph.inl" />
     <None Include="include\portulan\Topology.inl" />
+    <None Include="include\World.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6E9631AD-5F11-4244-9D03-791F124E05AB}</ProjectGuid>

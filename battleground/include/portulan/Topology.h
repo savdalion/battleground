@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../configure.h"
-#include "../image/ClanlibVisualImage.h"
+#include "../io/ClanlibVisual.h"
 #include "../world/@/portulan/struct.hcl"
 
 
@@ -37,6 +37,18 @@ private:
         std::memset( content.get(),  0,  sizeof( T ) * N );
         return std::move( content );
     }
+
+
+
+
+    /**
+    * Устанавливает длительность для действия.
+    * Сокр. от Duration Action.
+    */
+    inline void da( action_t& action, real_t from, real_t to ) {
+        action.duration[ 0 ] = from;
+        action.duration[ 1 ] = to;
+    };
 
 
 

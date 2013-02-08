@@ -54,7 +54,7 @@ TEST_F( WarriorTT,  SingleWarriorSingleStrategy_TrainingSingleSwordTurn ) {
     static const int needStep = 10 * 100000;
     static const bool closeWindow = true;
     static const bool showPulse = true;
-    world()->go< 1000, PULSE, needStep, closeWindow, showPulse >();
+    world()->go< 1000, PULSE, needStep, closeWindow, showPulse >( TIMESTEP );
 
     // сколько пульсов отработал движок
     const auto PL = world()->engine()->live().pulselive();

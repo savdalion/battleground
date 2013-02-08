@@ -32,12 +32,18 @@ namespace battleground {
 
 
 /**
-* Путь к ядрам файлам OpenCL.
+* Пути.
 */
 static const std::string PATH_BATTLEGROUND =
     "D:/Projects/workspace/battleground/battleground/include";
 static const std::string WORLD_PATH_BATTLEGROUND =
     PATH_BATTLEGROUND + "/world";
+
+static const std::string IMAGE_WORLD_PATH_BATTLEGROUND =
+    WORLD_PATH_BATTLEGROUND + "/image";
+static const std::string VISUAL_IMAGE_WORLD_PATH_BATTLEGROUND =
+    IMAGE_WORLD_PATH_BATTLEGROUND + "/visual";
+
 static const std::string INCARNATION_WORLD_PATH_BATTLEGROUND =
     WORLD_PATH_BATTLEGROUND + "/incarnation";
 static const std::string KIND_WORLD_PATH_BATTLEGROUND =
@@ -96,6 +102,15 @@ static const int MAX_Y_VISUAL_COORD =  HEIGHT_WINDOW / 2;
 */
 static const float MAX_VISUAL_CENTER_DISTANCE =
     typelib::vector2_t( MAX_X_VISUAL_COORD, MAX_Y_VISUAL_COORD ).length();
+
+
+
+
+/**
+* На сколько частей будет разбито "непрерывное время".
+* Чем больше - тем выше точность моделирования.
+*/
+static const size_t APPROXIMATE_TIMESTEP = 5;
 
 
 } // battleground
