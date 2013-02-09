@@ -53,13 +53,10 @@ inline ClanlibVisual::~ClanlibVisual() {
 inline ClanlibVisual& ClanlibVisual::operator<<(
     const Portulan& portulan
 ) {
-    const auto& topology = portulan.topology();
+    const auto& pt = portulan.topology();
 
     // размещаем на холсте элементы портулана
     #include "../world/@/io/ClanlibVisual/draw.inl"
-
-    mDisplayWindow->flip( 1 );
-    CL_KeepAlive::process();
 
     return *this;
 }

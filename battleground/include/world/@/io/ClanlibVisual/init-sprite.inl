@@ -5,20 +5,20 @@
 
 // простые спрайты
 
-insert( "warrior  Base",    "library/dc/player/base/human_f.png" );
-insert( "warrior  Body",    "library/dc/player/body/chainmail3.png" );
-insert( "warrior  Legs",    "library/dc/player/legs/leg_armor02.png" );
-insert( "warrior  Boots",   "library/dc/player/boots/long_white.png" );
-insert( "warrior  Gloves",  "library/dc/player/gloves/glove_white.png" );
+insert( "warrior  Base",    "library/dc/player/base/human_m.2x.png" );
+insert( "warrior  Body",    "library/dc/player/body/chainmail3.2x.png" );
+insert( "warrior  Legs",    "library/dc/player/legs/leg_armor02.2x.png" );
+insert( "warrior  Boots",   "library/dc/player/boots/long_white.2x.png" );
+insert( "warrior  Gloves",  "library/dc/player/gloves/glove_white.2x.png" );
 
-insert( "warrior  SwordReady",  "library/dc/player/hand1/boromir.png" );
+insert( "warrior  SwordReady",  "library/dc/player/hand1/boromir.2x.png" );
 
 //insert( "warrior  ActionProgress",    "" );
-insert( "warrior  ActionProgress90",  "library/dc/misc/mdam_lightly_damaged.png" );
-insert( "warrior  ActionProgress70",  "library/dc/misc/mdam_moderately_damaged.png" );
-insert( "warrior  ActionProgress50",  "library/dc/misc/mdam_heavily_damaged.png" );
-insert( "warrior  ActionProgress30",  "library/dc/misc/mdam_severely_damaged.png" );
-insert( "warrior  ActionProgress10",  "library/dc/misc/mdam_almost_dead.png" );
+insert( "warrior  ActionProgress90",  "library/dc/misc/mdam_lightly_damaged.2x.png" );
+insert( "warrior  ActionProgress70",  "library/dc/misc/mdam_moderately_damaged.2x.png" );
+insert( "warrior  ActionProgress50",  "library/dc/misc/mdam_heavily_damaged.2x.png" );
+insert( "warrior  ActionProgress30",  "library/dc/misc/mdam_severely_damaged.2x.png" );
+insert( "warrior  ActionProgress10",  "library/dc/misc/mdam_almost_dead.2x.png" );
 
 
 // составные спрайты
@@ -110,5 +110,11 @@ insert( "warrior  ActionProgress10",  "library/dc/misc/mdam_almost_dead.png" );
 
 
 // ПОЛЕ БИТВЫ
-
-insert( "battleground  Field",  "library/bg.jpg" );
+{
+    const typelib::json::Variant o = "{"
+        " 'alpha': 0.5"
+    " }";
+    ASSERT( !o.undefined()
+        && "Опции не установлены." );
+    insert( "battleground  Field",  "library/green-cross-grid-64x64.png",  o );
+}

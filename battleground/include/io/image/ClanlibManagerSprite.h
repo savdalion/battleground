@@ -54,7 +54,11 @@ public:
     /**
     * Связывает спрайт с заданным ключом.
     */
-    void insert( const keySprite_t&,  const std::string& path );
+    void insert(
+        const keySprite_t&,
+        const std::string&  path,
+        const typelib::json::Variant&  options = typelib::json::Variant()
+    );
 
 
 
@@ -106,6 +110,17 @@ public:
     *         nullptr, если фрейм загрузить на удалось.
     */
     CL_PixelBuffer* frame( const std::string& path );
+
+
+
+
+    /**
+    * Объединяет спрайты.
+    */
+    static CL_Sprite merge(
+        CL_GraphicContext&,
+        CL_Sprite& a,  CL_Sprite& b
+    );
 
 
 

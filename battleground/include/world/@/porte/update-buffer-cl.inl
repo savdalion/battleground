@@ -1,7 +1,7 @@
 ﻿// Инициализация буферов OpenCL.
 
-
-auto pt = portulan()->topology();
+    
+auto pt = mPortulan.lock()->topology();
 
 
 /**

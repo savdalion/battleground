@@ -12,9 +12,7 @@ inline Engine::Engine(
     // подготавливаем контекст и очередь команд дл€ работы с OpenCL
     prepareCL();
 
-    // инициируем переменные дл€ обмена данными с OpenCL
-    #include "../world/@/porte/init-buffer-cl.inl"
-
+    // # Ѕуферы OpenCL инициализируем при вызове incarnateSet().
     // # ядра OpenCL соберЄм по требованию.
 }
 

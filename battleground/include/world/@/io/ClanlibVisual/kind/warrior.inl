@@ -14,7 +14,8 @@ for (size_t i = 0; i < WARRIOR_COUNT; ++i) {
         pt->strategyWarriorContent.get()[ i ];
     CL_Sprite* s = managerSprite()->sprite( ch, st );
     const typelib::coord2_t nc =
-        fromPhysics( ch.coord.s[ 0 ],  ch.coord.s[ 1 ] );
+        fromPhysics( ch.coord.s[ 0 ],  -ch.coord.s[ 1 ] ) -
+        GRID_NORMA_COORD;
     s->draw( gc(), nc.x, nc.y );
     s->update();
 

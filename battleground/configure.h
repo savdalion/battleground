@@ -85,9 +85,10 @@ static const int CENTER_WINDOW_HEIGHT = HEIGHT_WINDOW / 2;
 /**
 * Согласование координат физ. и виз. миров.
 */
-static const typelib::coord2_t NORMA_COORD(
-    CENTER_WINDOW_WIDTH,  CENTER_WINDOW_HEIGHT
-);
+static const typelib::coord2_t NORMA_COORD =
+    typelib::coord2_t( CENTER_WINDOW_WIDTH,  CENTER_WINDOW_HEIGHT );
+static const typelib::coord2_t GRID_NORMA_COORD =
+    typelib::coord2_t( 0, 0 );
 
 
 

@@ -42,17 +42,6 @@ public:
 
 
 
-    /**
-    * ־בתוהטםÿוע פנוילû.
-    */
-    CL_PixelBuffer ManagerFrame::merge(
-        CL_PixelBuffer& a,
-        CL_PixelBuffer& b
-    ) const;
-
-
-
-
 private:
     knownFrame_t  mKnownFrame;
 };

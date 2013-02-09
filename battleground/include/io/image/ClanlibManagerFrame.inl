@@ -29,7 +29,7 @@ inline CL_PixelBuffer* ManagerFrame::frame(
 #ifdef _DEBUG
         std::cout << "  Фрейм '" << path << "' .. ";
 #endif
-        const int posExtension = path.find( '.' );
+        const int posExtension = path.find_last_of( '.' );
         const std::string extension =
             (posExtension == std::string::npos)
                 ? "" : path.substr( posExtension );
@@ -61,50 +61,6 @@ inline CL_PixelBuffer* ManagerFrame::frame(
         ).first;
 
         return ftr->second.get();
-}
-
-
-
-
-inline CL_PixelBuffer ManagerFrame::merge(
-    CL_PixelBuffer& a,
-    CL_PixelBuffer& b
-) const {
-    //const CL_Size sizeA = a.get_size();
-    if ( a.is_null() ) {
-        return b;
-    }
-
-    return a;
-
-    /* - @todo
-    CL_PixelBuffer r = a;
-    CL_Color cs[ 256 ];
-    for (int y = 0; y < a.get_height(); ++y) {
-        for (int x = 0; x < a.get_width(); ++x) {
-            if ( (x >= b.get_width()) || (y >= b.get_height()) ) {
-                continue;
-            }
-            const CL_Colorf colorA = a.get_pixel( x, y );
-            const CL_Colorf colorB = b.get_pixel( x, y );
-            // смешиваем
-            // @source http://en.wikipedia.org/wiki/Alpha_compositing
-            const float red =
-                colorA.get_red() * (1 - colorB.get_alpha()) +
-                    colorB.get_red() * colorB.get_alpha();
-            const float green =
-                colorA.get_green() * (1 - colorB.get_alpha()) +
-                    colorB.get_green() * colorB.get_alpha();
-            const float blue =
-                colorA.get_blue() * (1 - colorB.get_alpha()) +
-                    colorB.get_blue() * colorB.get_alpha();
-
-            const CL_Colorf color( red, green, blue );
-            r.set_colorkey(
-        }
-    }
-    return r;
-    */
 }
 
 

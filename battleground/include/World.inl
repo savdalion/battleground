@@ -76,26 +76,29 @@ void World::go( real_t timestep ) {
         const size_t fps = ClanlibVisual::calcFPS( deltaTime );
 #endif
 
-        gc.clear( CL_Colorf::aquamarine );
+        //gc.clear( CL_Colorf::aquamarine );
         *mVisual << *mPortulan;
-        //mEngine->pulse( timestep );
+        mEngine->pulse( timestep );
 
 #ifdef _DEBUG
         {
-            std::ostringstream ss;
-            ss << fps;
-            font.draw_text( gc, 10, 20, ss.str(), CL_Colorf::lemonchiffon );
+            const auto s = CL_StringHelp::int_to_text( fps );
+            font.draw_text( gc, 10, 20, s, CL_Colorf::black );
         }
 #endif
 
-		mCurrentTime = CL_System::get_time();
+        mVisual->displayWindow()->flip( 1 );
+        CL_KeepAlive::process();
+
+        mCurrentTime = CL_System::get_time();
         // 10 ms (100 hz)
 		static const int mainLoopRate = 10;
 		const int timeToSleep = mainLoopRate - (mCurrentTime - lastTime);
 		if (timeToSleep > 0) {
             CL_System::sleep( timeToSleep );
         }
-    }
+
+    } // while ( !ic.get_keyboard(). ...
 
 }
 

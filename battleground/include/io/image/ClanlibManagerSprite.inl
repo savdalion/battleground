@@ -25,8 +25,9 @@ inline ManagerSprite::~ManagerSprite() {
 
 
 void ManagerSprite::insert(
-    const keySprite_t& ks,
-    const std::string& path
+    const keySprite_t&  ks,
+    const std::string&  path,
+    const typelib::json::Variant&  o
 ) {
 #ifdef _DEBUG
         std::cout << "Простой спрайт '" << ks << "'" << std::endl;
@@ -45,6 +46,11 @@ void ManagerSprite::insert(
         -sprite->get_width() / 2,
         -sprite->get_height() / 2
     );
+
+    // опции спрайта
+    const auto alpha = o.at( "alpha", 1.0f );
+    sprite->set_alpha( alpha );
+
     mKnownSprite.insert( std::make_pair( ks, std::move( sprite ) ) );
 
     // запоминаем фрейм (понадобится для составных спрайтов)
@@ -66,48 +72,26 @@ inline void ManagerSprite::insert(
 #endif
 
     // объединяем спрайты из 'l' в один
-    CL_PixelBuffer ir;
-
+    CL_Sprite ir;
     for (auto itr = l.cbegin(); itr != l.cend(); ++itr) {
         auto str = mKnownSprite.find( *itr );
         if (str == mKnownSprite.end()) {
             throw porte::Exception( "Sprite '" + *itr + "' is not found in known sprite." );
         }
-        const CL_Sprite* sprite = str->second.get();
-        ASSERT( (sprite->get_frame_count() == 1)
+        CL_Sprite* s = str->second.get();
+        ASSERT( (s->get_frame_count() == 1)
             && "Умеем объединять только однофреймовые спрайты. @todo" );
 
-        // получаем фрейм спрайта
-        // # Фреймы спрайта предусмотрительно запомнили в insert() / mKnownFrame.
-#ifdef _DEBUG
-        std::cout << "  Фрейм '" << *itr << "'" << std::endl;
-#endif
-        auto ktr = mKnownFrame.find( *itr );
-        ASSERT( (ktr != mKnownFrame.end())
-            && "Не найдены фреймы для спрайта. Целостность нарушена." );
-        ASSERT( !ktr->second->is_null()
-            && "Фрейм пуст. Целостность нарушена." );
-        CL_PixelBuffer& image = *ktr->second;
-        ir = mManagerFrame->merge( ir, image );
+        ir = merge( mDisplayWindow->get_gc(), ir, *s );
     }
 
-    CL_SpriteDescription sd;
-    sd.add_frame( ir );
-    std::unique_ptr< CL_Sprite >
-        sprite( new CL_Sprite( mDisplayWindow->get_gc(),  sd ) );
     // устанавливаем центр спрайта
-    sprite->set_alignment(
+    ir.set_alignment(
         CL_Origin(),
-        -sprite->get_width() / 2,
-        -sprite->get_height() / 2
+        -ir.get_width() / 2,
+        -ir.get_height() / 2
     );
-    mKnownSprite.insert( std::make_pair( ks, std::move( sprite ) ) );
-
-    // запоминаем фрейм (понадобится для составных спрайтов)
-    std::unique_ptr< CL_PixelBuffer >  irPtr(
-        new CL_PixelBuffer( ir.copy() )
-    );
-    mKnownFrame.insert( std::make_pair( ks, std::move( irPtr ) ) );
+    mKnownSprite.insert( std::make_pair( ks,  new CL_Sprite( ir ) ) );
 }
 
 
@@ -127,6 +111,66 @@ inline CL_Sprite* ManagerSprite::sprite(
 ) {
     const auto ftr = mKnownSprite.find( ks );
     return (ftr == mKnownSprite.end()) ? nullptr : ftr->second.get();
+}
+
+
+
+
+inline CL_Sprite ManagerSprite::merge(
+    CL_GraphicContext& gc,
+    CL_Sprite& a,  CL_Sprite& b
+) {
+    if ( a.is_null() ) {
+        return b;
+    }
+
+    return a;
+
+    /* - @todo ...
+    a.draw( gc, 0, 0 );
+    a.update();
+    b.draw( gc, 0, 0 );
+    b.update();
+
+    const CL_PixelBuffer p = gc.get_pixeldata(
+        CL_Rect( 0, 0, a.get_width(), a.get_height() )
+    );
+    CL_SpriteDescription sd;
+    sd.add_frame( p );
+    CL_Sprite r( gc, sd );
+    r.update();
+
+    return r;
+    */
+
+    /*
+    CL_PixelBuffer r = a;
+    CL_Color cs[ 256 ];
+    for (int y = 0; y < a.get_height(); ++y) {
+        for (int x = 0; x < a.get_width(); ++x) {
+            if ( (x >= b.get_width()) || (y >= b.get_height()) ) {
+                continue;
+            }
+            const CL_Colorf colorA = a.get_pixel( x, y );
+            const CL_Colorf colorB = b.get_pixel( x, y );
+            // смешиваем
+            // @source http://en.wikipedia.org/wiki/Alpha_compositing
+            const float red =
+                colorA.get_red() * (1 - colorB.get_alpha()) +
+                    colorB.get_red() * colorB.get_alpha();
+            const float green =
+                colorA.get_green() * (1 - colorB.get_alpha()) +
+                    colorB.get_green() * colorB.get_alpha();
+            const float blue =
+                colorA.get_blue() * (1 - colorB.get_alpha()) +
+                    colorB.get_blue() * colorB.get_alpha();
+
+            const CL_Colorf color( red, green, blue );
+            r.set_colorkey(
+        }
+    }
+    return r;
+    */
 }
 
 

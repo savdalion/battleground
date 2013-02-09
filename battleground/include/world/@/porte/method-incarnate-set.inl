@@ -19,6 +19,10 @@ inline void Engine::incarnateSet(
         throw porte::Exception( "Set for incarnate is undefined." );
     }
 
+
+    // после подключения набора обновим буферы OpenCL
+    #include "update-buffer-cl.inl"
+
 } // inline void Engine::incarnateSet
 
 
