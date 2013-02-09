@@ -25,14 +25,14 @@ insert( "warrior  ActionProgress10",  "library/dc/misc/mdam_almost_dead.png" );
 
 // Воин без меча
 {
-    const std::vector< std::string >  v = boost::assign::list_of
+    const std::vector< keySprite_t >  l = boost::assign::list_of
         ( "warrior  Base" )
         ( "warrior  Body" )
         ( "warrior  Legs" )
         ( "warrior  Boots" )
         ( "warrior  Gloves" )
     ;
-    insert( "warrior  WarriorWithoutSword",  v );
+    insert( "warrior  WarriorWithoutSword",  l );
 }
 
 
@@ -44,23 +44,24 @@ insert( "warrior  ActionProgress10",  "library/dc/misc/mdam_almost_dead.png" );
     {
         roughlyStateWarrior_t state = {};
         state.characteristic[ 0 ].sword = true;
-        const std::vector< std::string >  l = boost::assign::list_of
+        const std::vector< keySprite_t >  l = boost::assign::list_of
             ( "warrior  WarriorWithoutSword" )
             ( "warrior  SwordReady" )
         ;
-        // @todo fine Свернуть в 1 метод.
         const std::string sn =
             "warrior  WarriorWithoutSword + SwordReady";
-        insert( sn, l );
-        insert( state, sn );
+        insert( state, sn, l );
     }
     // else
     {
         roughlyStateWarrior_t state = {};
         state.characteristic[ 0 ].sword = false;
+        const std::vector< keySprite_t >  l = boost::assign::list_of
+            ( "warrior  WarriorWithoutSword" )
+        ;
         const std::string sn =
-            "warrior  WarriorWithoutSword + SwordReady";
-        insert( state, sn );
+            "warrior  WarriorWithoutSword - SwordReady";
+        insert( state, sn, l );
     }
 }
 
@@ -75,15 +76,13 @@ insert( "warrior  ActionProgress10",  "library/dc/misc/mdam_almost_dead.png" );
         state.strategy[ 1 ]
         .Training.SingleSword.Turn.IntoCombatPosition
         .statistics.progress = 1.0;
-        const std::vector< std::string >  l = boost::assign::list_of
+        const std::vector< keySprite_t >  l = boost::assign::list_of
             ( "warrior  WarriorWithoutSword" )
             ( "warrior  ActionProgress90" )
         ;
-        // @todo fine Свернуть в 1 метод.
         const std::string sn =
             "warrior  WarriorWithoutSword + ActionProgress90";
-        insert( sn, l );
-        insert( state, sn );
+        insert( state, sn, l );
     }
 
     // | progress > 0.8
@@ -95,15 +94,21 @@ insert( "warrior  ActionProgress10",  "library/dc/misc/mdam_almost_dead.png" );
         state.strategy[ 1 ]
         .Training.SingleSword.Turn.IntoCombatPosition
         .statistics.progress = 0.9;
-        const std::vector< std::string >  l = boost::assign::list_of
+        const std::vector< keySprite_t >  l = boost::assign::list_of
             ( "warrior  WarriorWithoutSword" )
-            ( "warrior  ActionProgress80" )
+            ( "warrior  ActionProgress70" )
         ;
         const std::string sn =
-            "warrior  WarriorWithoutSword + ActionProgress80";
-        insert( sn, l );
-        insert( state, sn );
+            "warrior  WarriorWithoutSword + ActionProgress70";
+        insert( state, sn, l );
     }
 
     // ...
 }
+
+
+
+
+// ПОЛЕ БИТВЫ
+
+insert( "battleground  Field",  "library/bg.jpg" );

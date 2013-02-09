@@ -29,7 +29,7 @@ inline Engine::~Engine() {
 
 inline void Engine::pulse( real_t timestep ) {
 
-    assert( (timestep > 0.0f)
+    ASSERT( (timestep > 0.0f)
         && "Умеем работать только с натуральным временем в секундах." );
 
     // рассчитываем воздействия на тела звёздной системы
@@ -140,7 +140,7 @@ inline void Engine::prepareEmitEvent( const std::string& element ) {
 
     // @todo ...
 
-    assert( false && "Не реализовано." );
+    ASSERT( false && "Не реализовано." );
 }
 
 
@@ -188,7 +188,7 @@ inline void Engine::compileCLKernel(
         std::cout << "Собираем \"" << shortName << "\" ..";
 #endif
         const std::ifstream  file( pathAndName.c_str() );
-        assert( file.is_open()
+        ASSERT( file.is_open()
             && "Файл не найден." );
         std::stringstream buffer;
         buffer << file.rdbuf();
@@ -217,7 +217,7 @@ inline void Engine::compileCLKernel(
         std::cout << "\"" << fileKernel << "\" ..";
 #endif
         const std::ifstream  file( pathAndName.c_str() );
-        assert( file.is_open()
+        ASSERT( file.is_open()
             && "Файл ядра не найден." );
         std::stringstream buffer;
         buffer << file.rdbuf();
@@ -299,7 +299,7 @@ inline void Engine::enqueueEventKernelCL(
     const vectorEventCL_t&  waitEvents,
     cl::Event*              event
 ) {
-    assert( (mKernelCL.find( key ) != mKernelCL.cend())
+    ASSERT( (mKernelCL.find( key ) != mKernelCL.cend())
         && "Ядро OpenCL не найдено." );
 
     mQueueCL.enqueueNDRangeKernel(

@@ -28,7 +28,10 @@ public:
     * текстуру Clanlib).
     */
     typedef std::vector< std::string >  path_t;
-    typedef std::map< keySprite_t, path_t >  knownFrame_t;
+    typedef std::map<
+        keySprite_t,
+        std::unique_ptr< CL_PixelBuffer >
+    >  knownFrame_t;
 
     /**
     * Спрайты по состояниям элементов.
@@ -67,20 +70,20 @@ public:
 
 
     /**
-    * Методы для работы со спрайтами конкретных элементов портулана.
-    */
-    #include "../../world/@/io/ClanlibVisual/method-sprite-by-state.inl"
-
-
-
-
-    /**
     * @return Указатель на спрайт в формате ClanLib.
     *         nullptr, если спрайт не найден.
     */
     CL_Sprite const* sprite( const keySprite_t& ) const;
 
     CL_Sprite* sprite( const keySprite_t& );
+
+
+
+
+    /**
+    * Методы для работы со спрайтами конкретных элементов портулана.
+    */
+    #include "../../world/@/io/ClanlibVisual/method-sprite-by-state.inl"
 
 
 

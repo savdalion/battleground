@@ -83,6 +83,16 @@ static const int CENTER_WINDOW_HEIGHT = HEIGHT_WINDOW / 2;
 
 
 /**
+* Согласование координат физ. и виз. миров.
+*/
+static const typelib::coord2_t NORMA_COORD(
+    CENTER_WINDOW_WIDTH,  CENTER_WINDOW_HEIGHT
+);
+
+
+
+
+/**
 * Максимальные и минимальные координаты визуального мира, пкс.
 *
 * # Все координаты и размеры задаются относительно физ. мира игры.
@@ -111,6 +121,16 @@ static const float MAX_VISUAL_CENTER_DISTANCE =
 * Чем больше - тем выше точность моделирования.
 */
 static const size_t APPROXIMATE_TIMESTEP = 5;
+
+
+
+
+/**
+* Для отладки.
+*/
+#define ASSERT(e) ((void) (( e ) ? 0 : THROW_ASSERT( #e, __FILE__, __LINE__ )))
+#define THROW_ASSERT( e, file, line ) ( (void)std::printf( "%s:%u: failed assertion '%s'\n", file, line, e ),\
+    throw std::runtime_error( std::string( file ) + boost::lexical_cast< std::string >( line ) + ": failed assertion " + e ) )
 
 
 } // battleground

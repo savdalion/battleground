@@ -132,6 +132,14 @@ typedef struct __attribute__ ((packed)) {
     // обязательные
     uid_t uid;
 
+    /**
+    * Признак, что элемент существует.
+    *
+    * // # false - признак конца списка.
+    */
+    bool incarnate;
+
+
     // дополнительные
     coord_t   coord;
     _coord_t  _coord;
@@ -201,6 +209,14 @@ typedef struct __attribute__ ((packed)) {
 typedef struct __attribute__ ((packed)) {
     // обязательные
     uid_t uid;
+
+    /**
+    * Признак, что элемент существует.
+    *
+    * // # false - признак конца списка.
+    */
+    bool incarnate;
+
 
     // дополнительные
     extent_t   extent;

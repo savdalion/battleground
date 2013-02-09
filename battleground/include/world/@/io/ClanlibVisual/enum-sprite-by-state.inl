@@ -5,15 +5,15 @@
 
 // ВОИН
 typedef std::pair< roughlyStateWarrior_t, keySprite_t >
-    stateNamePairWarrior_t;
-typedef std::vector< stateNamePairWarrior_t >
-    stateNameWarrior_t;
-stateNameWarrior_t stateNameWarrior;
+    statePairWarrior_t;
+typedef std::vector< statePairWarrior_t >
+    stateWarrior_t;
+stateWarrior_t stateWarrior;
 
 
 // ПОЛЕ БИТВЫ
 typedef std::pair< roughlyStateBattleground_t, keySprite_t >
-    stateNamePairBattleground_t;
-typedef std::vector< stateNamePairBattleground_t >
-    stateNameBattleground_t;
-stateNameBattleground_t stateNameBattleground;
+    statePairBattleground_t;
+typedef std::vector< statePairBattleground_t >
+    stateBattleground_t;
+stateBattleground_t stateBattleground;

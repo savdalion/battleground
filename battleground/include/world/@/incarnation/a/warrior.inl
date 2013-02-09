@@ -20,12 +20,12 @@
     const real_t stability = 0.9f;
     const auto _stability = DEFAULT_MODIFICATOR_REAL_2K;
 
-    const characteristicWarrior_t chara = {
-        0,
+    const characteristicWarrior_t ch = {
+        0,  true,
         coord,      { _coord[ 0 ],      _coord[ 1 ] },
         direction,  { _direction[ 0 ],  _direction[ 1 ] },
         sword,      _sword,
         stability,  { _stability[ 0 ],  _stability[ 1 ] }
     };
-    incarnateWarrior( chara );
+    incarnateWarrior( ch );
 }

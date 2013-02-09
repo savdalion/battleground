@@ -10,11 +10,11 @@
 // ВОИН
 inline void insert(
     const roughlyStateWarrior_t& state,
-    const keySprite_t& ks
+    const keySprite_t& ks,
+    const std::vector< keySprite_t >  l
 ) {
-    assert( (mKnownSprite.find( ks ) != mKnownSprite.end())
-        && "Спрайт уже должен быть в mKnownSprite." );
-    stateNameWarrior.push_back( std::make_pair( state, ks ) );
+    insert( ks, l );
+    stateWarrior.push_back( std::make_pair( state, ks ) );
 }
 
 
@@ -23,11 +23,11 @@ inline void insert(
 // ПОЛЕ БИТВЫ
 inline void insert(
     const roughlyStateBattleground_t& state,
-    const keySprite_t& ks
+    const keySprite_t& ks,
+    const std::vector< keySprite_t >  l
 ) {
-    assert( (mKnownSprite.find( ks ) != mKnownSprite.end())
-        && "Спрайт уже должен быть в mKnownSprite." );
-    stateNameBattleground.push_back( std::make_pair( state, ks ) );
+    insert( ks, l );
+    stateBattleground.push_back( std::make_pair( state, ks ) );
 }
 
 
@@ -39,11 +39,12 @@ inline void insert(
 
 // ВОИН
 inline CL_Sprite* sprite(
-    const characteristicWarrior_t&,
-    const strategyWarrior_t&
+    const characteristicWarrior_t&  ch,
+    const strategyWarrior_t&  st
 ) {
-    // @todo ...
-    return nullptr;
+    return ch.sword ?
+        sprite( "warrior  WarriorWithoutSword + SwordReady" ) :
+        sprite( "warrior  WarriorWithoutSword - SwordReady" );
 }
 
 
@@ -54,6 +55,5 @@ CL_Sprite* sprite(
     const characteristicBattleground_t&,
     const strategyBattleground_t&
 ) {
-    // @todo ...
-    return nullptr;
+    return sprite( "battleground  Field" );
 }

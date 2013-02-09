@@ -7,12 +7,12 @@
 
 // ВОИН
 {
-    characteristicWarriorContentPtr =
+    characteristicWarriorContent =
         createContent< characteristicWarrior_t, WARRIOR_COUNT >();
-    strategyWarriorContentPtr =
+    strategyWarriorContent =
         createContent< strategyWarrior_t, WARRIOR_COUNT >();
     for (size_t i = 0; i < WARRIOR_COUNT; ++i) {
-        strategyWarrior_t& common = strategyWarriorContentPtr.get()[ i ];
+        strategyWarrior_t& common = strategyWarriorContent.get()[ i ];
         // Тренировка / С одноручным мечом / Вращение меча
         {
             strategyWarriorTurn_t& strategy =
@@ -35,9 +35,9 @@
 
 // ПОЛЕ БИТВЫ
 {
-    characteristicBattlegroundContentPtr =
+    characteristicBattlegroundContent =
         createContent< characteristicBattleground_t, BATTLEGROUND_COUNT >();
-    strategyBattlegroundContentPtr =
+    strategyBattlegroundContent =
         createContent< strategyBattleground_t, BATTLEGROUND_COUNT >();
 }
 

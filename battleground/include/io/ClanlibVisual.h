@@ -162,6 +162,18 @@ public:
 
 
     /**
+    * @return Преобразованные для визуализации в ClanLib координаты.
+    *
+    * @param x, y  Абсолютные координаты игрового движка: (0, 0) = центр.
+    *              Совпадают с координатами физ. мира.
+    */
+    template< typename T1, typename T2 >
+    static typelib::coord2_t fromPhysics( T1 x, T2 y );
+
+
+
+
+    /**
     * @return Кадры в секунду (Frame Per Second).
     */
     static size_t calcFPS( size_t frameTime );

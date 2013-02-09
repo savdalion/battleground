@@ -78,7 +78,7 @@ void World::go( real_t timestep ) {
 
         gc.clear( CL_Colorf::aquamarine );
         *mVisual << *mPortulan;
-        mEngine->pulse( timestep );
+        //mEngine->pulse( timestep );
 
 #ifdef _DEBUG
         {

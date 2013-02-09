@@ -8,7 +8,6 @@ inline ManagerFrame::ManagerFrame() {
 
 
 inline ManagerFrame::~ManagerFrame() {
-    bool test = true;
 }
 
 
@@ -17,7 +16,7 @@ inline ManagerFrame::~ManagerFrame() {
 inline CL_PixelBuffer* ManagerFrame::frame(
     const std::string& path
 ) {
-    assert( !path.empty()
+    ASSERT( !path.empty()
         && "Путь к фрейму не указан." );
 
     // проверяем кеш
@@ -39,7 +38,7 @@ inline CL_PixelBuffer* ManagerFrame::frame(
          || (extension == ".jpg")
         ;
         if ( !support ) {
-            assert( false
+            ASSERT( false
                 && "Этот тип изображения не поддерживается." );
             return nullptr;
         }
@@ -71,6 +70,11 @@ inline CL_PixelBuffer ManagerFrame::merge(
     CL_PixelBuffer& a,
     CL_PixelBuffer& b
 ) const {
+    //const CL_Size sizeA = a.get_size();
+    if ( a.is_null() ) {
+        return b;
+    }
+
     return a;
 
     /* - @todo

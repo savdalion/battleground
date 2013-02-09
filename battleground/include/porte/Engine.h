@@ -35,13 +35,13 @@ public:
 
 
     inline std::shared_ptr< const Portulan >  portulan() const {
-        assert( !mPortulan.expired() );
+        ASSERT( !mPortulan.expired() );
         return mPortulan.lock();
     }
 
 
     inline std::shared_ptr< Portulan >  portulan() {
-        assert( !mPortulan.expired() );
+        ASSERT( !mPortulan.expired() );
         return mPortulan.lock();
     }
 

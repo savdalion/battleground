@@ -51,7 +51,7 @@ inline ClanlibVisual::~ClanlibVisual() {
 
 
 inline ClanlibVisual& ClanlibVisual::operator<<(
-    const Portulan&  portulan
+    const Portulan& portulan
 ) {
     const auto& topology = portulan.topology();
 
@@ -73,7 +73,7 @@ inline ClanlibVisual& ClanlibVisual::operator<<( const option_t& json ) {
 
     mOption = json;
 
-    assert( false && "Не реализовано" );
+    ASSERT( false && "Не реализовано" );
 
     return *this;
 }
@@ -170,6 +170,16 @@ inline void ClanlibVisual::wait( std::shared_ptr< Engine >  engine ) {
 
 inline void ClanlibVisual::clear() {
     mDisplayWindow->get_gc().clear( CL_Colorf::darkgreen );
+}
+
+
+
+
+template< typename T1, typename T2 >
+inline typelib::coord2_t ClanlibVisual::fromPhysics( T1 x, T2 y ) {
+    // физ. центр координат должен совпасть с центром окна
+    // @todo Изменяемый размер окна.
+    return typelib::coord2_t( x, y ) + NORMA_COORD;
 }
 
 
