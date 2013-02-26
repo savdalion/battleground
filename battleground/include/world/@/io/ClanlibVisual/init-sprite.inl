@@ -1,6 +1,20 @@
 ﻿// Инициализация структур визуальных образов элементов портулана.
 
 
+// ПОЛЕ БИТВЫ
+{
+    const typelib::json::Variant o = "{"
+        " 'alpha': 0.5"
+    " }";
+    ASSERT( !o.undefined()
+        && "Опции не установлены." );
+    insert( "battleground  Field",  "library/green-cross-grid-64x64.png",  o );
+}
+
+
+
+
+
 // ВОИН
 
 // простые спрайты
@@ -71,10 +85,10 @@ insert( "warrior  ActionProgress10",  "library/dc/misc/mdam_almost_dead.2x.png" 
     {
         roughlyStateWarrior_t state = {};
         state.strategy[ 0 ]
-        .Training.SingleSword.Turn.IntoCombatPosition
+        .TrainingSingleSwordTurn.IntoCombatPosition
         .statistics.progress = 0.9;
         state.strategy[ 1 ]
-        .Training.SingleSword.Turn.IntoCombatPosition
+        .TrainingSingleSwordTurn.IntoCombatPosition
         .statistics.progress = 1.0;
         const std::vector< keySprite_t >  l = boost::assign::list_of
             ( "warrior  WarriorWithoutSword" )
@@ -89,10 +103,10 @@ insert( "warrior  ActionProgress10",  "library/dc/misc/mdam_almost_dead.2x.png" 
     {
         roughlyStateWarrior_t state = {};
         state.strategy[ 0 ]
-        .Training.SingleSword.Turn.IntoCombatPosition
+        .TrainingSingleSwordTurn.IntoCombatPosition
         .statistics.progress = 0.8;
         state.strategy[ 1 ]
-        .Training.SingleSword.Turn.IntoCombatPosition
+        .TrainingSingleSwordTurn.IntoCombatPosition
         .statistics.progress = 0.9;
         const std::vector< keySprite_t >  l = boost::assign::list_of
             ( "warrior  WarriorWithoutSword" )
@@ -109,12 +123,3 @@ insert( "warrior  ActionProgress10",  "library/dc/misc/mdam_almost_dead.2x.png" 
 
 
 
-// ПОЛЕ БИТВЫ
-{
-    const typelib::json::Variant o = "{"
-        " 'alpha': 0.5"
-    " }";
-    ASSERT( !o.undefined()
-        && "Опции не установлены." );
-    insert( "battleground  Field",  "library/green-cross-grid-64x64.png",  o );
-}

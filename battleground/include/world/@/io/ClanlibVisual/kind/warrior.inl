@@ -2,16 +2,15 @@
 // @see ClanlibVisual::operator<<()
 
 
-for (size_t i = 0; i < WARRIOR_COUNT; ++i) {
+for (base_t* bp = pt->baseWarriorContent.get(); bp->incarnate; ++bp) {
+    const size_t i =
+        std::distance( pt->baseWarriorContent.get(), bp );
+
     const characteristicWarrior_t& ch =
         pt->characteristicWarriorContent.get()[ i ];
-    if ( !ch.incarnate ) {
-        // # Пустой элемент - признак конца списка.
-        break;
-    }
-
     const strategyWarrior_t& st =
         pt->strategyWarriorContent.get()[ i ];
+
     CL_Sprite* s = managerSprite()->sprite( ch, st );
     const typelib::coord2_t nc =
         fromPhysics( ch.coord.s[ 0 ],  -ch.coord.s[ 1 ] ) -
@@ -19,7 +18,7 @@ for (size_t i = 0; i < WARRIOR_COUNT; ++i) {
     s->draw( gc(), nc.x, nc.y );
     s->update();
 
-} // for (size_t i = 0; i < WARRIOR_COUNT; ++i)
+} // for (base_t* bp = ...
 
 
 

@@ -65,20 +65,59 @@ inline void Engine::emitEvent( real_t timestep ) {
 
     // @todo fine clEnqueueMigrateMemObjects() для актуализации структур.
 
+    // определяем, какие стратегии должны быть выполнены элементами портулана
+    // # Память элемента может содержать неск. стратегий.
+    auto& pt = portulan()->topology();
 
-    // пульсируем, аппроксимируя непрерывность времени 'timestep'
+    // ВОИН
+    std::vector< STRATEGY_WARRIOR >  doStrategyWarrior;
+    doStrategyWarrior.reserve( WARRIOR_COUNT );
+    for (base_t* bp = pt->baseWarriorContent.get(); bp->incarnate; ++bp) {
+        const size_t i = std::distance( pt->baseWarriorContent.get(), bp );
+        shortTermMemoryWarrior_t& m =
+            pt->shortTermMemoryWarriorContent.get()[ i ];
+        for (cellStrategyWarrior_t* csp = m.content;
+             csp->strategy != STRATEGY_WARRIOR_NONE;
+             ++csp
+         ) {
+             doStrategyWarrior.push_back( csp->strategy );
+        }
+    }
+
+    // ПОЛЕ БИТВЫ
+    // @todo ...
+
+
+    // пульсируем, моделируя непрерывность времени 'timestep'
     const real_t dt =
         timestep / static_cast< real_t >( APPROXIMATE_TIMESTEP );
     for (size_t p = 0; p < APPROXIMATE_TIMESTEP; ++p) {
 
-        // # Перед началом каждого пульса и в конце него элементы -
-        //   упорядочены (оптимизированы). См. старания ниже.
+        // # Перед началом каждого пульса - элементы упорядочены
+        //   (оптимизированы). См. старания ниже.
 
         const auto timelive = mLive.timelive();
 
 
-        // просмотрим память всех элементов и отработаем все запланированные
-        // ими действия (в рамках стратегий)
+        // отработаем все запланированные элементами стратегии
+
+        // ВОИН
+        for (auto itr = doStrategyWarrior.cbegin();
+             itr != doStrategyWarrior.cend();  ++itr
+        ) {
+            const STRATEGY_WARRIOR strategy = *itr;
+            
+            std::cout << "warrior strategy " << strategy << "\n";
+
+            enqueueEventKernelCL< WARRIOR_OPTIMIZE_COUNT >(
+                "porte/warrior/move/walk/direction/direct"
+            );
+        }
+
+        // ПОЛЕ БИТВЫ
+        // @todo ...
+
+        mQueueCL.finish();
 
 
         // подготавливаем элементы к созданию событий

@@ -12,8 +12,12 @@ inline void Engine::incarnateSet(
 ) {
     // набор 'a'
     if (set == "a") {
+        //#include "../incarnation/a/arrow.inl"
         #include "../incarnation/a/battleground.inl"
+        #include "../incarnation/a/quiver.inl"
         #include "../incarnation/a/warrior.inl"
+        // связываем воплощённые элементы
+        #include "../incarnation/a/chain-uid.inl"
 
     } else {
         throw porte::Exception( "Set for incarnate is undefined." );

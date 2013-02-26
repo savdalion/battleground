@@ -122,6 +122,14 @@ private:
     */
     std::shared_ptr< ClanlibVisual >  mVisual;
 
+    /**
+    * События от игрока из визуального мира.
+    */
+    CL_Slot mSlotMouseDown;
+    CL_Slot mSlotMouseMove;
+    CL_Slot mSlotKeyboardDown;
+    CL_Slot mSlotWindowClose;
+
     size_t mCurrentTime;
 };
 

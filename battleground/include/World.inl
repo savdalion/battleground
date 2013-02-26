@@ -11,16 +11,17 @@ World::World(
     mCurrentTime( 0 )
 {
     // подключаем слушателей событий от игрока
-    mVisual->ic().get_mouse().sig_key_down()
+    // @todo fine Интерефейс для подключения слушателей у ClanlibVisual.
+    mSlotMouseDown = mVisual->ic().get_mouse().sig_key_down()
     .connect( this, &World::onMouseDown );
 
-    mVisual->ic().get_mouse().sig_pointer_move()
+    mSlotMouseMove = mVisual->ic().get_mouse().sig_pointer_move()
     .connect( this, &World::onMouseMove );
 
-    mVisual->ic().get_keyboard().sig_key_down()
+    mSlotKeyboardDown = mVisual->ic().get_keyboard().sig_key_down()
     .connect( this, &World::onKeyboardDown );
 
-    mVisual->displayWindow()->sig_window_close()
+    mSlotWindowClose = mVisual->displayWindow()->sig_window_close()
     .connect( this, &World::onWindowClose );
 
     //mVisual->displayWindow()->hide_cursor();
@@ -76,7 +77,7 @@ void World::go( real_t timestep ) {
         const size_t fps = ClanlibVisual::calcFPS( deltaTime );
 #endif
 
-        //gc.clear( CL_Colorf::aquamarine );
+        gc.clear( CL_Colorf::white );
         *mVisual << *mPortulan;
         mEngine->pulse( timestep );
 
@@ -118,6 +119,8 @@ void World::onMouseMove( const CL_InputEvent& ie, const CL_InputState& is ) {
 
 
 void World::onKeyboardDown( const CL_InputEvent& ie, const CL_InputState& is ) {
+    auto& pt = portulan()->topology();
+    #include "world/@/porte/warrior/listen/keyboard/press.inl"
 }
 
 

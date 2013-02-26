@@ -7,19 +7,6 @@
 * # Спрайт уже должен быть в mKnownSprite.
 */
 
-// ВОИН
-inline void insert(
-    const roughlyStateWarrior_t& state,
-    const keySprite_t& ks,
-    const std::vector< keySprite_t >  l
-) {
-    insert( ks, l );
-    stateWarrior.push_back( std::make_pair( state, ks ) );
-}
-
-
-
-
 // ПОЛЕ БИТВЫ
 inline void insert(
     const roughlyStateBattleground_t& state,
@@ -33,9 +20,33 @@ inline void insert(
 
 
 
+// ВОИН
+inline void insert(
+    const roughlyStateWarrior_t& state,
+    const keySprite_t& ks,
+    const std::vector< keySprite_t >  l
+) {
+    insert( ks, l );
+    stateWarrior.push_back( std::make_pair( state, ks ) );
+}
+
+
+
+
 /**
 * @return Спрайт согласно текущему состоянию элемента.
 */
+
+// ПОЛЕ БИТВЫ
+CL_Sprite* sprite(
+    const characteristicBattleground_t&,
+    const strategyBattleground_t&
+) {
+    return sprite( "battleground  Field" );
+}
+
+
+
 
 // ВОИН
 inline CL_Sprite* sprite(
@@ -50,10 +61,3 @@ inline CL_Sprite* sprite(
 
 
 
-// ПОЛЕ БИТВЫ
-CL_Sprite* sprite(
-    const characteristicBattleground_t&,
-    const strategyBattleground_t&
-) {
-    return sprite( "battleground  Field" );
-}

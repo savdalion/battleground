@@ -6,12 +6,14 @@
 #include <porte/include/porte/Pulse.h>
 #include <porte/include/porte/Exception.h>
 #include <typelib/typelib.h>
+#include <algorithm>
 #include <ostream>
 #include <set>
 #include <string>
 #include <boost/unordered_map.hpp>
 #include <boost/assign.hpp>
 #include "../portulan/Portulan.h"
+#include "../world/@/portulan/wrapper.h"
 
 
 namespace battleground {
