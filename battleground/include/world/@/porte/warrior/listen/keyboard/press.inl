@@ -3,7 +3,7 @@
 
 
 if ( (ie.id == CL_KEY_RIGHT) || (ie.id == CL_KEY_NUMPAD6) ) {
-    // воин получает стратегию движения вправо
+    // Движение вправо
 
     // @test
     std::cout << "Вправо\n";
@@ -11,18 +11,25 @@ if ( (ie.id == CL_KEY_RIGHT) || (ie.id == CL_KEY_NUMPAD6) ) {
     // # Управляемый воин у нас один, и он - первый в списке.
     const size_t i = 0;
 
+    // память
     const size_t firstFreeCell = 0;
     auto& mc = pt->shortTermMemoryWarriorContent.get()[ i ].content[ firstFreeCell ];
+
+    // стратегия
     mc.strategy = STRATEGY_WARRIOR_MOVE_WALK_DIRECTION;
+    // длительность действий
     strategyWarriorMoveWalkDirection_t s = {};
     Topology::da( s.Move,  1 );
+    // входящие параметры
     static const direction_t DIRECTION = { 1, 0, 0 };
     s.directionVector = DIRECTION;
     s.distance = 2.0f;
+
+    // помещаем иницированную стратегию в память
     mc.cell.MoveWalkDirection = s;
 
 } else if (ie.id == CL_KEY_SPACE) {
-    // воин получает стратегию выстрела из лука
+    // Выстрел из лука
 
     // @test
     std::cout << "Выстрел из лука\n";
@@ -53,6 +60,8 @@ if ( (ie.id == CL_KEY_RIGHT) || (ie.id == CL_KEY_NUMPAD6) ) {
     s.quiver = 1;
     // внутренние переменные
     // # Инициируем только те, что отличаются от 0.
+    // текущее действие
+    // @todo ...
 
     // помещаем иницированную стратегию в память
     mc.cell.ShootBow = s;

@@ -106,12 +106,25 @@ inline void Engine::emitEvent( real_t timestep ) {
              itr != doStrategyWarrior.cend();  ++itr
         ) {
             const STRATEGY_WARRIOR strategy = *itr;
-            
             std::cout << "warrior strategy " << strategy << "\n";
+            switch ( strategy ) {
+                case STRATEGY_WARRIOR_MOVE_WALK_DIRECTION:
+                    // @todo ...
+                    break;
 
-            enqueueEventKernelCL< WARRIOR_OPTIMIZE_COUNT >(
-                "porte/warrior/move/walk/direction/direct"
-            );
+                case STRATEGY_WARRIOR_SHOOT_BOW:
+                    enqueueEventKernelCL< WARRIOR_OPTIMIZE_COUNT >(
+                        "porte/warrior/shoot/bow/direct"
+                    );
+                    break;
+
+                case STRATEGY_WARRIOR_TRAINING_SINGLE_SWORD_TURN:
+                    // @todo ...
+                    break;
+
+                default:
+                    throw porte::Exception( "Undefined strategy." );
+            }
         }
 
         // онке ахрбш

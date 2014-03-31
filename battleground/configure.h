@@ -121,7 +121,7 @@ static const float MAX_VISUAL_CENTER_DISTANCE =
 * Ќа сколько частей будет разбито "непрерывное врем€".
 * „ем больше - тем выше точность моделировани€.
 */
-static const size_t APPROXIMATE_TIMESTEP = 5;
+static const size_t APPROXIMATE_TIMESTEP = 10;
 
 
 

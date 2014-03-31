@@ -226,6 +226,7 @@ typedef struct __attribute__ ((packed)) {
     // внутренние переменные стратегии
     number_t     completeDistance;
     direction_t  lastMove;
+    
 } strategyWarriorMoveWalkDirection_t;
 
 
@@ -260,6 +261,9 @@ typedef struct __attribute__ ((packed)) {
     direction_t  direction;
     number_t     velocity;
     vector_t     vd;
+    // текущее действие в стратегии
+    enum SHOOT_BOW_ACTION_WARRIOR current;
+    
 } strategyWarriorShootBow_t;
 
 
@@ -279,6 +283,7 @@ typedef struct __attribute__ ((packed)) {
     statisticsDo_t  statistics;
     // входящие параметры стратегии
     number_t  durationTraining;
+    
 } strategyWarriorTrainingSingleSwordTurn_t;
 
 
@@ -287,6 +292,7 @@ typedef struct __attribute__ ((packed)) {
     strategyWarriorMoveWalkDirection_t        MoveWalkDirection;
     strategyWarriorShootBow_t                 ShootBow;
     strategyWarriorTrainingSingleSwordTurn_t  TrainingSingleSwordTurn;
+    
 } strategyWarrior_t;
 
 
@@ -295,6 +301,7 @@ typedef union __attribute__ ((packed)) {
     strategyWarriorMoveWalkDirection_t        MoveWalkDirection;
     strategyWarriorShootBow_t                 ShootBow;
     strategyWarriorTrainingSingleSwordTurn_t  TrainingSingleSwordTurn;
+    
 } cellDataStrategyWarrior_t;
 
 
